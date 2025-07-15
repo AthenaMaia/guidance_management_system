@@ -69,6 +69,8 @@ php artisan route:cache --quiet\n\
 php artisan view:cache --quiet\n\
 echo "Running database migrations..."\n\
 php artisan migrate --force --no-interaction\n\
+echo "Running database seeding..."\n\
+php artisan db:seed --force --no-interaction\n\
 echo "Laravel application ready!"\n\
 apache2-foreground' > /var/www/html/start.sh
 
