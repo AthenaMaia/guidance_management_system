@@ -20,6 +20,9 @@ use App\Http\Controllers\StudentTransitionController;
 use App\Http\Controllers\YearController;
 use Illuminate\Support\Facades\Route;
 
+// Include health check routes
+require __DIR__.'/health.php';
+
 // Redirect root URL to login page or dashboard based on authentication status
 Route::get('/', function () {
     if (auth()->check()) {
