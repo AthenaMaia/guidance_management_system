@@ -184,7 +184,7 @@
             </div>
 
             <!-- Student Table -->
-            <div class="overflow-auto rounded-lg border border-gray-200 mt-4">
+ <div class="overflow-x-auto md:overflow-x-visible rounded-lg border border-gray-200 mt-4">
                 <table class="min-w-full text-sm divide-y divide-gray-200">
                     <thead class="bg-[#a82323] text-white text-left">
                         <tr>

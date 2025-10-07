@@ -185,8 +185,7 @@
                 @endif
 
                 <!-- Referral Table -->
-                <div class="overflow-x-auto border border-gray-200 rounded-lg shadow-sm custom-scrollbar">
-                        <table class="min-w-full divide-y divide-gray-200 text-sm">
+ <div class="overflow-x-auto md:overflow-x-visible rounded-lg border border-gray-200 mt-4">                        <table class="min-w-full divide-y divide-gray-200 text-sm">
                             <thead class="bg-gradient-to-r from-red-800 to-red-600 text-white text-left">
                                 <tr>
                                     <th class="px-4 py-3 font-semibold">Student ID</th>

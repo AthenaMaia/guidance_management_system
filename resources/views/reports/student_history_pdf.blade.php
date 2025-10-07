@@ -140,7 +140,7 @@
         <div class="section-title">Contracts</div>
          <p class="summary">
            Contract Status :  {{ request('filter_contract_status') ? ucfirst(request('filter_contract_status')) : 'All' }} <br>
-            Contract Type : {{ request('filter_contract_type') ? ucfirst(request('filter_contract_type')) : 'Contracts' }} <br>
+            Contract Type : {{ request('filter_contract_type') ? ucfirst(request('filter_contract_type')) : ' All ' }} <br>
         </p>
             <p class="summary">Total Contracts: {{ $contracts->count() }}</p>
         @if($contracts->isNotEmpty())

@@ -49,7 +49,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/student/{student}/profile/{semester}', [StudentController::class, 'viewHistoricalProfile'])->name('student.viewHistoricalProfile');
     Route::get('/student/{student}/profile/{profile}', [StudentController::class, 'viewProfile'])->name('student.profile.view');
     Route::post('/students/import', [StudentController::class, 'import'])->name('student.import');
-Route::put('/students/{student}/profile/update', [StudentController::class, 'updateProfile'])->name('student.updateProfile');
+    Route::put('/students/{student}/profile/update', [StudentController::class, 'updateProfile'])->name('student.updateProfile');
 
     // Semester routes
     Route::resource('semester', SemesterController::class);
@@ -59,7 +59,9 @@ Route::put('/students/{student}/profile/update', [StudentController::class, 'upd
     Route::post('/school-years/store', [SemesterController::class, 'storeSchoolYear'])->name('school-years.store');
     Route::resource('semesters', SemesterController::class)->only(['index', 'store']);
     Route::post('/school-years/{id}/activate', [SchoolYearController::class, 'activate'])->name('school-years.activate');
-    
+    Route::delete('/school-years/{schoolYear}', [SchoolYearController::class, 'destroy'])->name('school-years.destroy');
+    Route::delete('/semesters/{semester}', [SemesterController::class, 'destroy'])->name('semesters.destroy');
+
     // Contract routes
     Route::resource('contracts', ContractController::class);
     Route::get('/students/{student}/contracts/create', [ContractController::class, 'createForStudent'])->name('student.createContract');

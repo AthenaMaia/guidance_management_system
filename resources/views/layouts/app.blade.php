@@ -31,7 +31,7 @@
       x-data="{ sidebarOpen: false, pageLoading: true }"
       x-init="window.addEventListener('load', () => pageLoading = false)">
     
-    {{-- 🌟 GLOBAL PAGE LOADER – visible until window fully loads --}}
+    {{-- GLOBAL PAGE LOADER --}}
     <div x-show="pageLoading" x-cloak x-transition.opacity
          class="fixed inset-0 flex items-center justify-center bg-white z-[9999]">
         <div class="text-center">
@@ -39,7 +39,7 @@
             <p class="text-gray-700 font-medium">Loading… please wait</p>
         </div>
     </div>
-    {{-- 🌟 End Global Loader --}}
+    {{-- End Global Loader --}}
 
     <!-- Overlay for mobile -->
     <div x-show="sidebarOpen" @click="sidebarOpen = false" class="fixed inset-0 bg-black bg-opacity-50 md:hidden z-20"></div>
@@ -54,7 +54,8 @@
         <!-- Main content -->
         <div class="flex-1 flex flex-col min-h-screen overflow-x-hidden overflow-y-auto md:pl-0 transition-all duration-300 main-content">
             <!-- Top Bar -->
-            <header class="bg-white shadow-sm px-4 py-3 border-b border-gray-200 flex justify-between items-center">
+           <header class="bg-white shadow-sm px-4 py-3 border-b border-gray-200 flex justify-between items-center 
+        sticky top-0 z-40 backdrop-blur-md bg-white/95">
                 <div class="flex items-center gap-3">
                     <button @click="sidebarOpen = !sidebarOpen" class="md:hidden text-gray-500 focus:outline-none">
                         <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2"

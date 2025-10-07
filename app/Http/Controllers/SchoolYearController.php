@@ -39,7 +39,7 @@ public function store(Request $request)
         'is_active' => true,
     ]);
 
-    // 👇 Auto-create 1st Semester for the new School Year (set as current)
+    // Auto-create 1st Semester for the new School Year (set as current)
     Semester::create([
         'school_year_id' => $newSchoolYear->id,
         'semester' => '1st', // default
