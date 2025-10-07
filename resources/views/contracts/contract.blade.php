@@ -187,7 +187,7 @@
                         </div>
                     </div>
 
-                    <!-- Status Banner (if needed) -->
+                    <!-- Status Banner  -->
                     @if(session('success'))
                         <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-md flex items-center mb-4">
                             <div class="flex-shrink-0">
@@ -216,8 +216,7 @@
 
                     <!-- Contract Table -->
                     <!-- Table -->
-                    <div class="overflow-x-auto border border-gray-200 rounded-lg mt-4 bg-white shadow-sm">
-                        <table class="min-w-full divide-y divide-gray-200 text-sm">
+                     <div class="overflow-x-auto md:overflow-x-visible rounded-lg border border-gray-200 mt-4">                        <table class="min-w-full divide-y divide-gray-200 text-sm">
                             <thead style="background:#a82323;" class="text-white text-left">
                                 <tr>
                                     {{-- <th class="px-4 py-3">A.Y</th>
