@@ -54,7 +54,8 @@
         <!-- Main content -->
         <div class="flex-1 flex flex-col min-h-screen overflow-x-hidden overflow-y-auto md:pl-0 transition-all duration-300 main-content">
             <!-- Top Bar -->
-            <header class="bg-white shadow-sm px-4 py-3 border-b border-gray-200 flex justify-between items-center">
+           <header class="bg-white shadow-sm px-4 py-3 border-b border-gray-200 flex justify-between items-center 
+        sticky top-0 z-40 backdrop-blur-md bg-white/95">
                 <div class="flex items-center gap-3">
                     <button @click="sidebarOpen = !sidebarOpen" class="md:hidden text-gray-500 focus:outline-none">
                         <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2"
