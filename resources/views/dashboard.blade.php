@@ -158,7 +158,58 @@
                 </a>
             </div>
 
-            <!-- Optional: Recent Activity or Graph here -->
+          <!-- SYSTEM-WIDE TOTALS -->
+<div class="mt-10">
+    <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+        <i class="fas fa-database text-red-600 mr-2"></i> System-Wide Totals
+    </h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- All Students -->
+        <div class="bg-white shadow-md rounded-lg p-6 flex items-center space-x-4 stat-card stat-card-students">
+            <div class="bg-red-100 p-4 rounded-full text-red-600 shadow-sm">
+                <i class="fas fa-users fa-2x"></i>
+            </div>
+            <div>
+                <p class="text-gray-500 text-sm font-medium">All Students in System</p>
+                <h3 class="text-2xl font-bold">{{ $systemTotalStudents ?? '0' }}</h3>
+            </div>
+        </div>
+
+        <!-- All Contracts -->
+        <div class="bg-white shadow-md rounded-lg p-6 flex items-center space-x-4 stat-card stat-card-contracts">
+            <div class="bg-green-100 p-4 rounded-full text-green-600 shadow-sm">
+                <i class="fas fa-file-alt fa-2x"></i>
+            </div>
+            <div>
+                <p class="text-gray-500 text-sm font-medium">All Contracts in System</p>
+                <h3 class="text-2xl font-bold">{{ $systemTotalContracts ?? '0' }}</h3>
+            </div>
+        </div>
+
+        <!-- All Referrals -->
+        <div class="bg-white shadow-md rounded-lg p-6 flex items-center space-x-4 stat-card stat-card-referrals">
+            <div class="bg-blue-100 p-4 rounded-full text-blue-600 shadow-sm">
+                <i class="fas fa-handshake fa-2x"></i>
+            </div>
+            <div>
+                <p class="text-gray-500 text-sm font-medium">All Referrals in System</p>
+                <h3 class="text-2xl font-bold">{{ $systemTotalReferrals ?? '0' }}</h3>
+            </div>
+        </div>
+
+        <!-- All Counselings -->
+        <div class="bg-white shadow-md rounded-lg p-6 flex items-center space-x-4 stat-card stat-card-counselings">
+            <div class="bg-yellow-100 p-4 rounded-full text-yellow-600 shadow-sm">
+                <i class="fas fa-comments fa-2x"></i>
+            </div>
+            <div>
+                <p class="text-gray-500 text-sm font-medium">All Counselings in System</p>
+                <h3 class="text-2xl font-bold">{{ $systemTotalCounselings ?? '0' }}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Recent Activities Section -->
 <div class="mt-8 space-y-8">
     <div class="flex justify-between items-center">

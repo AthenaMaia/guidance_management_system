@@ -121,7 +121,7 @@
                     <h3 class="text-xl font-semibold text-[#a82323] border-b pb-2 mb-2">Student Information</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         <x-student-info label="Student ID" :value="$student->student_id" />
-                        <x-student-info label="Birthday" :value="$student->birthday?->format('F j, Y')" />
+                        {{-- <x-student-info label="Birthday" :value="$student->birthday?->format('F j, Y')" /> --}}
                         <x-student-info label="Gender" :value="$student->gender ?? 'N/A'" />
                         <x-student-info label="Course, Year & Section" :value="($profile?->course ?? 'N/A') . ' - ' . ($profile?->year_level ?? '') . ($profile?->section ?? '')" />
                        <x-student-info label="School Year" :value="$schoolYearName" />
