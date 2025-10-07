@@ -195,7 +195,6 @@
                                     <th class="px-4 py-3 font-semibold">Section</th>
                                     <th class="px-4 py-3 font-semibold">Reason</th>
                                     <th class="px-4 py-3 font-semibold">Date</th>
-                                    <th class="px-4 py-3 font-semibold text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100 bg-white">
