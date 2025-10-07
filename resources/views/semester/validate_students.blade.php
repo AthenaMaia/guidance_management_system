@@ -206,10 +206,6 @@ x-init="
                     </button>
                 </div>
 
-                {{-- Pagination below --}}
-                <div class="pagination flex justify-end">
-                    {{ $students->onEachSide(1)->links() }}
-                </div>
             </div>
 
                 @if($students->count() > 0)
@@ -606,12 +602,18 @@ x-init="
                                 @endforeach
                             </tbody>
                         </table>
+                        
                         </div>
+
                     </div>
                 @else
                     <p class="text-center text-gray-500 py-6">No students found based on filters.</p>
                 @endif
             </form>
+            {{-- Pagination below --}}
+                <div class="pagination flex justify-end">
+                    {{ $students->onEachSide(1)->links() }}
+                </div>
         </div>
     </div>
 </x-app-layout>

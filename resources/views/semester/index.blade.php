@@ -202,7 +202,7 @@
                                                 {{ $sy->is_active ? 'Active' : 'Inactive' }}
                                             </span>
                                         </td>
-                                        <td class="p-3">
+                                        {{-- <td class="p-3">
                                             @if(!$sy->is_active)
                                                 <form action="{{ route('school-years.activate', $sy->id) }}" method="POST" class="inline">
                                                     @csrf
@@ -211,7 +211,7 @@
                                                     </button>
                                                 </form>
                                             @endif
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 @empty
                                     <tr>

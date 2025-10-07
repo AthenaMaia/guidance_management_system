@@ -52,7 +52,7 @@
                     <select name="semester" id="semester" required 
                             class="block w-full rounded-lg border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 transition-colors">
                         <option value="">Choose semester...</option>
-                        <option value="1st">1st Semester</option>
+                        {{-- <option value="1st">1st Semester</option> --}}
                         <option value="2nd">2nd Semester</option>
                         <option value="Summer">Summer Term</option>
                     </select>

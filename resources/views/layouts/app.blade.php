@@ -31,7 +31,7 @@
       x-data="{ sidebarOpen: false, pageLoading: true }"
       x-init="window.addEventListener('load', () => pageLoading = false)">
     
-    {{-- 🌟 GLOBAL PAGE LOADER – visible until window fully loads --}}
+    {{-- GLOBAL PAGE LOADER --}}
     <div x-show="pageLoading" x-cloak x-transition.opacity
          class="fixed inset-0 flex items-center justify-center bg-white z-[9999]">
         <div class="text-center">
@@ -39,7 +39,7 @@
             <p class="text-gray-700 font-medium">Loading… please wait</p>
         </div>
     </div>
-    {{-- 🌟 End Global Loader --}}
+    {{-- End Global Loader --}}
 
     <!-- Overlay for mobile -->
     <div x-show="sidebarOpen" @click="sidebarOpen = false" class="fixed inset-0 bg-black bg-opacity-50 md:hidden z-20"></div>
