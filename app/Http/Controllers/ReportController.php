@@ -637,7 +637,50 @@ return !$hasCopyInCurrent && $semesterIds->contains($counseling->semester_id);
         'counselingCounts'
     ))->setPaper('a4', 'portrait');
 
-    return $pdf->download("Report_{$schoolYear->school_year}_{$semesterName}.pdf");
+    // Build dynamic filename
+$baseName = "Report_{$schoolYear->school_year}_{$semesterName}";
+
+// Append based on selected tab and filters
+switch ($tab) {
+    case 'contracts':
+        $type = $request->filter_contract_type ? str_replace(' ', '_', $request->filter_contract_type) : 'AllTypes';
+        $status = $request->filter_contract_status ? str_replace(' ', '_', $request->filter_contract_status) : 'AllStatus';
+        $baseName .= "_Contracts_{$type}_{$status}";
+        break;
+
+    case 'referrals':
+        $reason = $request->filter_reason ? str_replace(' ', '_', $request->filter_reason) : 'AllReasons';
+        $baseName .= "_Referrals_{$reason}";
+        break;
+
+    case 'counseling':
+        $status = $request->filter_counseling_status ? str_replace(' ', '_', $request->filter_counseling_status) : 'AllStatus';
+        $baseName .= "_Counseling_{$status}";
+        break;
+
+    case 'transitions':
+        $type = $request->filter_transition_type ? str_replace(' ', '_', $request->filter_transition_type) : 'AllTypes';
+        $baseName .= "_Transitions_{$type}";
+        break;
+
+    case 'student_profiles':
+        $course = $request->filter_course ? str_replace(' ', '_', $request->filter_course) : 'AllCourses';
+        $year = $request->filter_year ? str_replace(' ', '_', $request->filter_year) : 'AllYears';
+        $section = $request->filter_section ? str_replace(' ', '_', $request->filter_section) : 'AllSections';
+        $baseName .= "_Profiles_{$course}_{$year}_{$section}";
+        break;
+
+    default:
+        $baseName .= "_AllData";
+        break;
+}
+
+// Clean filename and limit length
+$fileName = preg_replace('/[^A-Za-z0-9_\-]/', '', $baseName);
+$fileName = substr($fileName, 0, 180); // prevent filename too long errors
+
+return $pdf->download("{$fileName}.pdf");
+
 }
 
 
@@ -791,9 +834,51 @@ return !$hasCarriedOver && $semesterIds->contains($counseling->semester_id);
         ],
     };
 
-    $filename = 'Report_' . $schoolYear?->school_year . '_' . $semesterName . '_' . ucfirst($tab) . '.xlsx';
+    // Build dynamic filename
+$baseName = "Report_{$schoolYear->school_year}_{$semesterName}";
 
-    return Excel::download(new ReportExcelExport($sheets), $filename);
+switch ($tab) {
+    case 'contracts':
+        $type = $request->filter_contract_type ? str_replace(' ', '_', $request->filter_contract_type) : 'AllTypes';
+        $status = $request->filter_contract_status ? str_replace(' ', '_', $request->filter_contract_status) : 'AllStatus';
+        $baseName .= "_Contracts_{$type}_{$status}";
+        break;
+
+    case 'referrals':
+        $reason = $request->filter_reason ? str_replace(' ', '_', $request->filter_reason) : 'AllReasons';
+        $baseName .= "_Referrals_{$reason}";
+        break;
+
+    case 'counseling':
+        $status = $request->filter_counseling_status ? str_replace(' ', '_', $request->filter_counseling_status) : 'AllStatus';
+        $baseName .= "_Counseling_{$status}";
+        break;
+
+    case 'transitions':
+        $type = $request->filter_transition_type ? str_replace(' ', '_', $request->filter_transition_type) : 'AllTypes';
+        $baseName .= "_Transitions_{$type}";
+        break;
+
+    case 'student_profiles':
+        $course = $request->filter_course ? str_replace(' ', '_', $request->filter_course) : 'AllCourses';
+        $year = $request->filter_year ? str_replace(' ', '_', $request->filter_year) : 'AllYears';
+        $section = $request->filter_section ? str_replace(' ', '_', $request->filter_section) : 'AllSections';
+        $baseName .= "_Profiles_{$course}_{$year}_{$section}";
+        break;
+
+    default:
+        $baseName .= "_AllData";
+        break;
+}
+
+// Clean and trim filename
+$fileName = preg_replace('/[^A-Za-z0-9_\-]/', '', $baseName);
+$fileName = substr($fileName, 0, 180); 
+$fileName .= '.xlsx';
+
+return Excel::download(new ReportExcelExport($sheets), $fileName);
+
+  
 }
 
 
@@ -807,90 +892,160 @@ public function exportStudentPdf(Request $request)
 
     $include = $request->input('export_type', 'all');
 
+    // CONTRACTS
+    $allContracts = Contract::with('images')
+        ->where('student_id', $student->id)
+        ->get();
 
-   $allContracts = Contract::with('images')
-    ->where('student_id', $student->id)
-    ->get();
+    $contracts = $allContracts->filter(function ($contract) use ($semesterIds, $allContracts, $request) {
+        if ($request->filled('filter_contract_status') && $contract->status !== $request->filter_contract_status) return false;
+        if ($request->filled('filter_contract_type') && $contract->contract_type !== $request->filter_contract_type) return false;
 
-$contracts = $allContracts->filter(function ($contract) use ($semesterIds, $allContracts, $request) {
-    if ($request->filled('filter_contract_status') && $contract->status !== $request->filter_contract_status) return false;
-    if ($request->filled('filter_contract_type') && $contract->contract_type !== $request->filter_contract_type) return false;
+        $originalId = $contract->original_contract_id ?? $contract->id;
 
-    $originalId = $contract->original_contract_id ?? $contract->id;
+        if (!is_null($contract->original_contract_id)) {
+            return $semesterIds->contains($contract->semester_id);
+        }
 
-    if (!is_null($contract->original_contract_id)) {
-        return $semesterIds->contains($contract->semester_id);
-    }
+        $hasCarriedOver = $allContracts->contains(function ($c) use ($originalId, $semesterIds) {
+            return $c->original_contract_id == $originalId && $semesterIds->contains($c->semester_id);
+        });
 
-    $hasCarriedOver = $allContracts->contains(function ($c) use ($originalId, $semesterIds) {
-        return $c->original_contract_id == $originalId && $semesterIds->contains($c->semester_id);
+        return !$hasCarriedOver && $semesterIds->contains($contract->semester_id);
     });
 
-    return !$hasCarriedOver && $semesterIds->contains($contract->semester_id);
-});
+    // REFERRALS
+    $referrals = ($include === 'all' || $include === 'referrals')
+        ? Referral::with('images')
+            ->where('student_id', $student->id)
+            ->whereIn('semester_id', $semesterIds)
+            ->when($request->filter_reason, fn($q) => $q->where('reason', $request->filter_reason))
+            ->get()
+        : collect();
 
-
-
-    $referrals = ($include === 'all' || $include === 'referrals') ? Referral::with('images')
-    ->where('student_id', $student->id)
-    ->whereIn('semester_id', $semesterIds)
-    ->when($request->filter_reason, fn($q) => $q->where('reason', $request->filter_reason))
-    ->get() : collect();
-
-
-    // ✅ Enhanced logic for counseling records (align with view() and index())
+    // COUNSELINGS
     $counselings = collect();
-if ($include === 'all' || $include === 'counselings') {
+    if ($include === 'all' || $include === 'counselings') {
         $allStudentCounselings = Counseling::with(['semester', 'images', 'original'])
             ->where('student_id', $student->id)
             ->get();
 
         $counselings = $allStudentCounselings->filter(function ($counseling) use ($semesterIds, $allStudentCounselings, $request) {
-    if ($request->filled('filter_counseling_status') && $counseling->status !== $request->filter_counseling_status) {
-        return false;
+            if ($request->filled('filter_counseling_status') && $counseling->status !== $request->filter_counseling_status) {
+                return false;
+            }
+
+            $originalId = $counseling->original_counseling_id ?? $counseling->id;
+
+            if (!is_null($counseling->original_counseling_id)) {
+                return $semesterIds->contains($counseling->semester_id);
+            }
+
+            $hasCopyInCurrent = $allStudentCounselings->contains(function ($c) use ($originalId, $semesterIds) {
+                return $c->original_counseling_id == $originalId && $semesterIds->contains($c->semester_id);
+            });
+
+            return !$hasCopyInCurrent && $semesterIds->contains($counseling->semester_id);
+        });
     }
 
-    $originalId = $counseling->original_counseling_id ?? $counseling->id;
-
-    // If this is a carried-over copy, keep it only if it's in the selected semester
-    if (!is_null($counseling->original_counseling_id)) {
-        return $semesterIds->contains($counseling->semester_id);
-    }
-
-    // If this is the original, exclude it if a carried-over copy exists in current sem
-    $hasCopyInCurrent = $allStudentCounselings->contains(function ($c) use ($originalId, $semesterIds) {
-        return $c->original_counseling_id == $originalId && $semesterIds->contains($c->semester_id);
-    });
-
-    return !$hasCopyInCurrent && $semesterIds->contains($counseling->semester_id);
-});
-
-    }
-
+    // PROFILE
     $profile = StudentProfile::where('student_id', $student->id)
         ->whereIn('semester_id', $semesterIds)
         ->latest()
         ->first();
 
+    $semesterName = $request->semester_name;
     $tab = $include;
 
-    $semesterName = $request->semester_name; 
+    // 🧠 Build filename using student's full name
+    $studentName = trim("{$student->first_name} {$student->last_name}");
+    $studentName = str_replace(' ', '_', $studentName); // Replace spaces with underscores
 
+    $baseName = "{$studentName}_{$schoolYear->school_year}_{$semesterName}";
+
+    switch ($include) {
+        case 'contracts':
+            $type = $request->filter_contract_type ? str_replace(' ', '_', $request->filter_contract_type) : 'AllTypes';
+            $status = $request->filter_contract_status ? str_replace(' ', '_', $request->filter_contract_status) : 'AllStatus';
+            $baseName .= "_Contracts_{$type}_{$status}";
+            break;
+
+        case 'referrals':
+            $reason = $request->filter_reason ? str_replace(' ', '_', $request->filter_reason) : 'AllReasons';
+            $baseName .= "_Referrals_{$reason}";
+            break;
+
+        case 'counselings':
+            $status = $request->filter_counseling_status ? str_replace(' ', '_', $request->filter_counseling_status) : 'AllStatus';
+            $baseName .= "_Counseling_{$status}";
+            break;
+
+        default:
+            $baseName .= "_AllData";
+            break;
+    }
+
+    // Clean filename
+    $fileName = preg_replace('/[^A-Za-z0-9_\-]/', '', $baseName);
+    $fileName = substr($fileName, 0, 180) . '.pdf';
+
+    // Generate PDF
     $pdf = Pdf::loadView('reports.student_history_pdf', compact(
         'student', 'contracts', 'referrals', 'counselings', 'profile', 'schoolYear', 'semesterName', 'tab'
     ))->setPaper('a4', 'portrait');
 
-    return $pdf->download("StudentRecord_{$student->student_id}.pdf");
+    return $pdf->download($fileName);
 }
+
 
 
 public function exportStudentExcel(Request $request)
 {
+    $student = Student::findOrFail($request->student_id);
+    $schoolYear = SchoolYear::findOrFail($request->school_year_id);
+    $semesterName = $request->semester_name ?? 'Semester';
+
+    // Build student's full name and clean it for filename
+    $studentName = trim("{$student->first_name} {$student->last_name}");
+    $studentName = str_replace(' ', '_', $studentName); // replace spaces with underscores
+
+    $include = $request->input('export_type', 'all');
+    $baseName = "{$studentName}_{$schoolYear->school_year}_{$semesterName}";
+
+    switch ($include) {
+        case 'contracts':
+            $type = $request->filter_contract_type ? str_replace(' ', '_', $request->filter_contract_type) : 'AllTypes';
+            $status = $request->filter_contract_status ? str_replace(' ', '_', $request->filter_contract_status) : 'AllStatus';
+            $baseName .= "_Contracts_{$type}_{$status}";
+            break;
+
+        case 'referrals':
+            $reason = $request->filter_reason ? str_replace(' ', '_', $request->filter_reason) : 'AllReasons';
+            $baseName .= "_Referrals_{$reason}";
+            break;
+
+        case 'counselings':
+            $status = $request->filter_counseling_status ? str_replace(' ', '_', $request->filter_counseling_status) : 'AllStatus';
+            $baseName .= "_Counseling_{$status}";
+            break;
+
+        default:
+            $baseName .= "_AllData";
+            break;
+    }
+
+    // Clean and limit filename length
+    $fileName = preg_replace('/[^A-Za-z0-9_\-]/', '', $baseName);
+    $fileName = substr($fileName, 0, 180) . '.xlsx';
+
+    // Return Excel download
     return Excel::download(
         new \App\Exports\StudentHistoryExport($request),
-        "StudentRecord_{$request->student_id}.xlsx"
+        $fileName
     );
 }
+
 
 
 // public function exportExcel(Request $request)

@@ -30,7 +30,7 @@
     <!-- Export Button -->
     <button @click="open = true"
         class="bg-[#a82323] text-white px-4 py-2 rounded shadow hover:bg-red-700 transition text-sm">
-        Export Student History
+        Export Student Records
     </button>
 
     <!-- Modal Overlay -->
@@ -39,7 +39,7 @@
     <!-- Modal Content -->
     <div x-show="open" class="fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
                 bg-white p-6 rounded-lg shadow-lg w-full max-w-xl space-y-4">
-        <h2 class="text-lg font-bold text-[#a82323]">Export Student History</h2>
+        <h2 class="text-lg font-bold text-[#a82323]">Export Student Records</h2>
 
         <form method="GET" target="_blank" class="space-y-4">
             <input type="hidden" name="student_id" value="{{ $student->id }}">
