@@ -35,7 +35,7 @@
                     </div>
 
                     <!-- Referral Table -->
-                    <div class="overflow-x-auto bg-white border border-gray-200 rounded-lg shadow">
+                     <div class="overflow-x-auto md:overflow-x-visible rounded-lg border border-gray-200 mt-4">                        <table class="min-w-full divide-y divide-gray-200 text-sm">
                         <table class="min-w-full divide-y divide-gray-200 text-sm md:text-base">
                             <thead style="background:#a82323; color:#fff;">
                                 <tr>
