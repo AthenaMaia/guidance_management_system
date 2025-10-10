@@ -124,20 +124,22 @@
                     <table class="min-w-full divide-y divide-gray-200 text-sm">
                         <thead class="bg-gradient-to-r from-red-800 to-red-600 text-white text-left">
                             <tr>
-                                <th class="px-4 py-3 font-semibold">A.Y</th>
-                                <th class="px-4 py-3 font-semibold">Semester</th>
-                                <th class="px-4 py-3 font-semibold">Name</th>
+                                <th class="px-4 py-3 font-semibold">Student ID</th>
+                                <th class="px-4 py-3 font-semibold">Student</th>
+                                <th class="px-4 py-3 font-semibold">School year</th>
+                                <th class="px-4 py-3 font-semibold">Sem</th>
                                 <th class="px-4 py-3 font-semibold">Type</th>
-                                <th class="px-4 py-3 font-semibold">Date</th>
-                                <th class="px-4 py-3 font-semibold text-center">Actions</th>
+                                <th class="px-4 py-3 font-semibold text-center">Date</th>
+                                <th class="px-4 py-3 font-semibold text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100 bg-white">
                             @forelse($transitions as $transition)
                                 <tr class="table-row-hover">
+                                     <td class="px-4 py-3 font-medium text-gray-800">{{ $transition->student->student_id }}</td>
+                                      <td class="px-4 py-3 font-medium text-gray-800">{{ $transition->last_name }}, {{ $transition->first_name }}{{ $transition->middle_name }}. {{ $transition->suffix }}</td>
                                     <td class="px-4 py-3">{{ $transition->semester->schoolYear->school_year ?? 'N/A' }}</td>
                                     <td class="px-4 py-3">{{ $transition->semester->semester ?? 'N/A' }} Sem</td>
-                                    <td class="px-4 py-3 font-medium text-gray-800">{{ $transition->last_name }}, {{ $transition->first_name }}{{ $transition->middle_name }}. {{ $transition->suffix }}</td>
                                     <td class="px-4 py-3">
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $transition->transition_type === 'Transfer' ? 'bg-blue-100 text-blue-800' : ($transition->transition_type === 'Drop' ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800') }}">
                                             {{ $transition->transition_type }}

@@ -39,8 +39,9 @@
         <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-800">
                 <x-student-info label="Student Name" :value="$transition->last_name . ', ' . $transition->first_name . ' ' . $transition->middle_name" />
-                <x-student-info label="Movement Type" :value="$transition->transition_type" />
-                <x-student-info label="Movement Date" :value="\Carbon\Carbon::parse($transition->transition_date)->format('F d, Y')" />
+                <x-student-info label=" Type" :value="$transition->transition_type" />
+                <x-student-info label="School Year & Sem" :value="$transition->semester->schoolYear->school_year . '- ' . $transition->semester->semester " />
+                <x-student-info label=" Date" :value="\Carbon\Carbon::parse($transition->transition_date)->format('F d, Y')" />
             </div>
         </div>
 

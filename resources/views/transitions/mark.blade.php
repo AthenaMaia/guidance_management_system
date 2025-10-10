@@ -6,7 +6,6 @@
         <form action="{{ route('transitions.storeStudentTransition') }}" method="POST" class="p-6 space-y-4">
             @csrf
 
-            <!-- ✅ Make sure this is passed correctly -->
             <input type="hidden" name="student_id" value="{{ $student->id }}">
 
             <h2 class="text-lg font-semibold text-gray-800">Update Student Admission</h2>
