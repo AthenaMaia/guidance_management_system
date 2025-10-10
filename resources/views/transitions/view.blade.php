@@ -39,8 +39,10 @@
         <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-800">
                 <x-student-info label="Student Name" :value="$transition->last_name . ', ' . $transition->first_name . ' ' . $transition->middle_name" />
-                <x-student-info label="Movement Type" :value="$transition->transition_type" />
-                <x-student-info label="Movement Date" :value="\Carbon\Carbon::parse($transition->transition_date)->format('F d, Y')" />
+                 <x-student-info label="Student ID" :value="$transition->student->student_id" />
+                <x-student-info label=" Type" :value="$transition->transition_type" />
+                <x-student-info label="School Year & Sem" :value="$transition->semester->schoolYear->school_year . '- ' . $transition->semester->semester " />
+                <x-student-info label=" Date" :value="\Carbon\Carbon::parse($transition->transition_date)->format('F d, Y')" />
             </div>
         </div>
 
@@ -118,18 +120,19 @@
                     <button type="button" @click="openCamera"
                             class="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg w-32 h-32 hover:border-red-500 hover:bg-gray-50 transition">
                         <div class="text-3xl text-gray-400"></div>
-                        <span class="text-xs mt-1 text-gray-600">Take Photo</span>
+                        <span class="text-xs mt-1 text-gray-600">Scan</span>
                     </button>
 
                     <button type="button" @click="openGallery"
                             class="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg w-32 h-32 hover:border-red-500 hover:bg-gray-50 transition">
                         <div class="text-3xl text-gray-400"></div>
-                        <span class="text-xs mt-1 text-gray-600">Choose Gallery</span>
+                        <span class="text-xs mt-1 text-gray-600">Gallery</span>
                     </button>
                 </div>
             </form>
         </div>
 
+<p x-show="errorMessage" x-text="errorMessage" class="text-xs text-red-600 mt-2"></p>
         @endif
     </div>
 </div>

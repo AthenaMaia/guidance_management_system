@@ -519,15 +519,15 @@ x-init="
                                                                         <!-- Take Photo -->
                                                                         <button type="button" @click="openCamera"
                                                                                 class="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg w-28 h-28 hover:border-red-500 hover:bg-gray-50 transition">
-                                                                            <span class="text-2xl">📷</span>
-                                                                            <span class="text-xs mt-1 text-gray-600">Take Photo</span>
+                                                                            <span class="text-2xl"></span>
+                                                                            <span class="text-xs mt-1 text-gray-600">Scan</span>
                                                                         </button>
 
                                                                         <!-- Choose Gallery -->
                                                                         <button type="button" @click="openGallery"
                                                                                 class="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg w-28 h-28 hover:border-red-500 hover:bg-gray-50 transition">
-                                                                            <span class="text-2xl">🖼️</span>
-                                                                            <span class="text-xs mt-1 text-gray-600">Choose Gallery</span>
+                                                                            <span class="text-2xl"></span>
+                                                                            <span class="text-xs mt-1 text-gray-600">Gallery</span>
                                                                         </button>
                                                                     </div>
 
@@ -544,7 +544,7 @@ x-init="
                                                                             </div>
                                                                         </template>
                                                                     </div>
-
+                                                                    <p x-show="errorMessage" x-text="errorMessage" class="text-xs text-red-600 mt-2"></p>
                                                                     <p class="text-xs text-gray-500">You may upload relevant documents or take a photo directly.</p>
                                                                 </div>
 

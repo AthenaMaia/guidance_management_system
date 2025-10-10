@@ -88,18 +88,23 @@
                            {{ $counseling->student->last_name }}, {{ $counseling->student->first_name }} {{ $counseling->student->middle_name }}. {{ $counseling->student->suffix }}
                         </span>
                     </div>
-                    <x-student-info label="Counseling Date" :value="\Carbon\Carbon::parse($counseling->counseling_date)->format('F j, Y')" />
-                </div>
+                    <x-student-info label="Student ID" :value="$counseling->student->student_id" />
+                                   </div>
                 <div>
                     @php
                         $profile = $counseling->student->profiles->where('semester_id', $counseling->semester_id)->first()
                             ?? $counseling->student->profiles->sortByDesc('semester_id')->first();
                     @endphp
-                    <div class="bg-gray-100 p-3 rounded shadow-sm">
-                        <span class="text-sm text-gray-500 font-medium">Course & Section</span><br>
-                        <span class="text-base font-bold text-red-700">
-                            {{ $profile?->course ?? 'N/A' }} {{ $profile?->year_level ?? '' }} {{ $profile?->section ?? '' }}
-                        </span>
+                    <div class="flex flex-col gap-3">
+                        
+                        <div class="bg-gray-100 p-3 rounded shadow-sm">
+                            <span class="text-sm text-gray-500 font-medium">Course & Section</span><br>
+                            <span class="text-base font-bold text-red-700">
+                                {{ $profile?->course ?? 'N/A' }} {{ $profile?->year_level ?? '' }} {{ $profile?->section ?? '' }}
+                            </span>
+                        </div>
+                         <x-student-info label="Counseling Date" :value="\Carbon\Carbon::parse($counseling->counseling_date)->format('F j, Y')" />
+
                     </div>
                 </div>
             </div>
@@ -178,13 +183,13 @@
                         <button type="button" @click="openCamera"
                                 class="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg w-32 h-32 hover:border-red-500 hover:bg-gray-50 transition">
                             <div class="text-3xl text-gray-400"></div>
-                            <span class="text-xs mt-1 text-gray-600">Take Photo</span>
+                            <span class="text-xs mt-1 text-gray-600">Scan</span>
                         </button>
 
                         <button type="button" @click="openGallery"
                                 class="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg w-32 h-32 hover:border-red-500 hover:bg-gray-50 transition">
                             <div class="text-3xl text-gray-400"></div>
-                            <span class="text-xs mt-1 text-gray-600">Choose Gallery</span>
+                            <span class="text-xs mt-1 text-gray-600">Gallery</span>
                         </button>
                     </div>
                 </form>
@@ -239,13 +244,13 @@
                         <button type="button" @click="openCamera"
                                 class="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg w-32 h-32 hover:border-red-500 hover:bg-gray-50 transition">
                             <div class="text-3xl text-gray-400"></div>
-                            <span class="text-xs mt-1 text-gray-600">Take Photo</span>
+                            <span class="text-xs mt-1 text-gray-600">Scan</span>
                         </button>
 
                         <button type="button" @click="openGallery"
                                 class="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg w-32 h-32 hover:border-red-500 hover:bg-gray-50 transition">
                             <div class="text-3xl text-gray-400"></div>
-                            <span class="text-xs mt-1 text-gray-600">Choose Gallery</span>
+                            <span class="text-xs mt-1 text-gray-600"> Gallery</span>
                         </button>
                     </div>
                 </form>
@@ -267,6 +272,7 @@
              class="w-full max-h-[80vh] object-contain rounded-lg border-4 border-white shadow-lg">
     </div>
 </div>
+<p x-show="errorMessage" x-text="errorMessage" class="text-xs text-red-600 mt-2"></p>
 
     </div>
 </x-app-layout>

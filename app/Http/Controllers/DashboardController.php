@@ -16,7 +16,7 @@ class DashboardController extends Controller
     {
         $activeSemester = Semester::where('is_current', true)->first();
 
-        // Handle case where there’s no active semester
+       
         if (!$activeSemester) {
             return view('dashboard', [
                 'totalStudents' => 0,
@@ -92,6 +92,7 @@ class DashboardController extends Controller
             'recentContracts',
             'recentReferrals',
             'recentCounselings'
+        
         ));
     }
 }

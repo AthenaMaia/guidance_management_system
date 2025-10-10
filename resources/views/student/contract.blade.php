@@ -40,7 +40,7 @@
                     </div>
 
                     <!-- Contracts Table -->
-                    <div class="overflow-x-auto bg-white rounded-lg border border-gray-200 shadow">
+                     <div class="overflow-x-auto md:overflow-x-visible rounded-lg border border-gray-200 mt-4">                        <table class="min-w-full divide-y divide-gray-200 text-sm">
                         <table class="min-w-full text-sm md:text-base text-gray-700">
                             <thead class="bg-[#a82323] text-white text-left">
                                 <tr>

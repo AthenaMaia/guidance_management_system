@@ -44,10 +44,12 @@
         <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-800">
                 <div class="flex flex-col gap-3">
+                   
                     <div class="flex flex-col bg-gray-100 dark:bg-gray-800 p-3 rounded shadow-sm">
                         <span class="text-sm text-gray-500 dark:text-gray-300 font-medium">Student Name</span>
                         <span class="text-lg font-bold text-red-700">{{ $referral->student->last_name }}, {{ $referral->student->first_name }} {{ $referral->student->middle_name }}. {{ $referral->student->suffix }}</span>
                     </div>
+                     <x-student-info label="Student ID" :value="$referral->student->student_id" />
                     <x-student-info label="Reason" :value="$referral->reason" />
                 </div>
 
@@ -122,7 +124,7 @@
 
         <!-- Upload Image Options -->
         @if(empty($readonly))
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 col-span-full">
+     <div class="flex flex-wrap items-center  gap-3 col-span-full">
             <!-- Take Photo -->
             <form action="{{ route('referrals.uploadImages', ['id' => $referral->id, 'type' => 'referral']) }}"
                   method="POST"
@@ -138,7 +140,7 @@
                        onchange="this.form.submit()">
                 <div class="text-center">
                     <div class="text-3xl text-gray-500 mb-1"></div>
-                    <p class="text-sm text-gray-700">Take Photo</p>
+                    <p class="text-sm text-gray-700">Scan</p>
                 </div>
             </form>
 
@@ -157,10 +159,12 @@
                        onchange="this.form.submit()">
                 <div class="text-center">
                     <div class="text-3xl text-gray-500 mb-1"></div>
-                    <p class="text-sm text-gray-700">Choose from Gallery</p>
+                    <p class="text-sm text-gray-700"> Gallery</p>
                 </div>
             </form>
         </div>
+        
+<p x-show="errorMessage" x-text="errorMessage" class="text-xs text-red-600 mt-2"></p>
         @endif
     </div>
 </div>

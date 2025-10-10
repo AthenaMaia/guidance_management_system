@@ -42,7 +42,7 @@
                     </div> --}}
 
                     <!-- Counseling Table -->
-                    <div class="overflow-x-auto border border-gray-200 rounded-lg shadow bg-white">
+                     <div class="overflow-x-auto md:overflow-x-visible rounded-lg border border-gray-200 mt-4">                        <table class="min-w-full divide-y divide-gray-200 text-sm">
                         <table class="min-w-full divide-y divide-gray-200 text-sm md:text-base">
                             <thead class="bg-[#a82323] text-white">
                                 <tr>
@@ -83,10 +83,7 @@
                         </table>
                     </div>
 
-                    <!-- Note -->
-                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-4 text-sm text-yellow-700 rounded">
-                        <p><strong>Note:</strong> Use the <span class="font-semibold">"+ New Counseling Record"</span> button to log a new session. Click "View" to see full session details.</p>
-                    </div>
+                    
 
                     <!-- Modals -->
                     @include('student.createCounseling')

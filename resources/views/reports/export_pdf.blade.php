@@ -212,7 +212,7 @@
     </div>
 
     <div class="report-title">
-        GUIDANCE OFFICE RECORDS REPORT
+        GUIDANCE OFFICE RECORDS 
     </div>
 
     <div class="">
@@ -240,7 +240,7 @@
             Current School Year : {{ $schoolYear->school_year }}<br>
             Semester : {{ $semesterName }}<br>
             Course :  {{ request('filter_course') ? ucfirst(request('filter_course')) : 'All' }} <br>
-            Year :  {{ request('filter_year_level') ? ucfirst(request('filter_year_level')) : 'All' }} <br>
+            Year :  {{ request('filter_year') ? ucfirst(request('filter_year')) : 'All' }} <br>
             Section : {{ request('filter_section') ? ucfirst(request('filter_section')) : 'All' }}<br>
         </p>
         <p class="summary">Total Students: {{ $students->count() }}</p>

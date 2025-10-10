@@ -104,6 +104,44 @@
             </main>
         </div>
     </div>
+<script>
+document.addEventListener('alpine:init', () => {
+    Alpine.data('imageUploader', () => ({
+        files: [],
+        errorMessage: '',
+        maxSizeMB: 5, 
+
+        handleFiles(event) {
+            this.errorMessage = '';
+            const selectedFiles = Array.from(event.target.files);
+
+            selectedFiles.forEach(file => {
+                if (file.size > this.maxSizeMB * 1024 * 1024) {
+                    this.errorMessage = ` "${file.name}" exceeds ${this.maxSizeMB} MB limit and was not added.`;
+                    return;
+                }
+                if (!this.files.some(f => f.file.name === file.name && f.file.size === file.size)) {
+                    this.files.push({ file, url: URL.createObjectURL(file) });
+                }
+            });
+
+            this.syncFinalInput(event.target.getAttribute('data-final-input'));
+        },
+
+        remove(index, finalInputId) {
+            this.files.splice(index, 1);
+            this.syncFinalInput(finalInputId);
+        },
+
+        syncFinalInput(finalInputId) {
+            const dataTransfer = new DataTransfer();
+            this.files.forEach(f => dataTransfer.items.add(f.file));
+            const input = document.getElementById(finalInputId);
+            if (input) input.files = dataTransfer.files;
+        }
+    }));
+});
+</script>
 
 </body>
 </html>

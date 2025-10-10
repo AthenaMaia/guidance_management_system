@@ -124,7 +124,7 @@ public function store(Request $request)
         'student_id' => 'required|exists:students,id',
         'contract_date' => 'required|date',
         'contract_type' => 'required|exists:contract_types,type',
-        'remarks' => 'nullable|string|max:1000',
+        'remarks' => 'nullable|string',
         'contract_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
         'status' => 'nullable|string',
     ];
@@ -287,10 +287,10 @@ $contracts = new \Illuminate\Pagination\LengthAwarePaginator(
 
     $currentSemester = Semester::where('is_current', true)->first();
 
-    // ✅ Only validated students for the current semester
+    // Only validated students for the current semester
     $students = Student::whereHas('enrollments', function ($query) use ($currentSemester) {
         $query->where('semester_id', $currentSemester->id)
-              ->where('is_enrolled', true); // assuming 'is_enrolled' indicates validated students
+              ->where('is_enrolled', true); 
     })->with('enrollments')->get();
 
     return view('contracts.contract', compact('contracts', 'students', 'semesters', 'contractTypes'));

@@ -126,7 +126,7 @@
     <div class="flex gap-4">
         <!-- Camera Input -->
         <label class="flex-1 flex items-center justify-center px-3 py-2 border border-gray-400 rounded-lg bg-white text-sm font-medium text-gray-700 cursor-pointer hover:bg-gray-100 transition">
-             Take Photo
+             Scan
             <input type="file" accept="image/*" capture="environment" class="hidden" @change="handleFiles">
         </label>
 
@@ -151,6 +151,7 @@
         </template>
     </div>
 
+<p x-show="errorMessage" x-text="errorMessage" class="text-xs text-red-600 mt-2"></p>
     <p class="text-xs text-gray-500">
         Upload relevant documents or images. You can use your camera or choose from your gallery.
     </p>

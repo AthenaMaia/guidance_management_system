@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2025 at 07:33 AM
+-- Generation Time: Oct 10, 2025 at 08:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -67,7 +67,7 @@ CREATE TABLE `contracts` (
   `contract_type` varchar(255) DEFAULT NULL,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
-  `remarks` varchar(255) DEFAULT NULL,
+  `remarks` longtext DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `is_hidden` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -82,9 +82,12 @@ INSERT INTO `contracts` (`id`, `student_id`, `original_contract_id`, `carried_ov
 (3, 509, NULL, NULL, 1, '2025-10-07', NULL, NULL, NULL, 'In Progress', '2025-10-07 00:36:49', '2025-10-07 00:36:49', 'Misconduct', NULL, NULL, NULL, NULL, 0),
 (4, 566, 1, NULL, 2, '2025-10-08', NULL, NULL, NULL, 'Completed', '2025-10-07 00:45:41', '2025-10-07 00:45:41', 'deloading', NULL, NULL, NULL, NULL, 0),
 (5, 566, 2, NULL, 2, '2025-10-05', NULL, 20, NULL, 'Completed', '2025-10-07 00:45:41', '2025-10-07 01:32:12', 'Community Service', '2025-10-15', '2025-11-04', NULL, NULL, 0),
-(6, 509, 3, NULL, 2, '2025-10-07', NULL, NULL, NULL, 'In Progress', '2025-10-07 00:47:33', '2025-10-07 00:47:33', 'Misconduct', NULL, NULL, NULL, NULL, 0),
+(6, 509, 3, NULL, 2, '2025-10-07', NULL, NULL, NULL, 'In Progress', '2025-10-07 00:47:33', '2025-10-10 07:54:42', 'Misconduct', NULL, NULL, 'Aliqua sed ad amet aliquip minim tempor labore et ut dolor. Incididunt consectetur sed incididunt adipiscing sit. Do magna commodo tempor aliqua aliqua. Magna commodo commodo ad do adipiscing ut adipiscing ad aliqua dolore aliquip aliqua lorem. Exercitation ad dolor dolore ea sed ut incididunt eiusmod consectetur enim ullamco laboris enim aliqua. Ad consectetur commodo minim ipsum ex do labore lorem elit sed sit ad.\r\n\r\nEa consectetur quis sed nostrud dolor tempor tempor enim quis sit lorem sed ullamco adipiscing. Ex minim aliquip ea ipsum consequat elit labore ad consectetur nisi sit veniam ex. Ut dolor enim aliquip commodo ullamco.\r\n\r\nAliqua aliquip ut do ea adipiscing ullamco tempor. Aliqua labore exercitation lorem consequat elit do et ut consequat amet magna aliqua. Nisi nostrud consectetur elit eiusmod ut nostrud lorem ea sed elit aliqua. Ad sit elit do laboris magna adipiscing laboris eiusmod elit.\r\n\r\nUt ad aliquip do consequat ex adipiscing ut ullamco enim. Et aliqua ipsum nisi incididunt ea veniam amet tempor nisi exercitation consequat ut ea lorem. Commodo aliqua ut elit minim ut labore dolore. Ut enim laboris sed quis ea do enim dolore adipiscing exercitation aliqua veniam. Ut ullamco labore do aliquip aliquip.\r\n\r\nEx eiusmod ullamco amet dolore et elit aliqua sed ut ea nisi dolor nostrud. Ad et lorem sit sed aliqua. Ut ex ullamco eiusmod dolor dolor ut quis labore elit laboris. Nostrud ad dolore ad do nostrud ex minim aliqua eiusmod commodo adipiscing ad nisi laboris.\r\n\r\nAd ut incididunt ad ea ullamco minim aliqua aliquip do ut labore ut dolor sit. Do ad aliqua et tempor consequat laboris quis ullamco incididunt enim magna veniam ut. Do ex adipiscing ut nisi magna ullamco ullamco do sed eiusmod sit.\r\n\r\nConsequat ipsum eiusmod aliquip consectetur quis ad. Labore nostrud tempor labore consectetur veniam. Ut lorem ut dolore ad dolore. Ut et quis magna ipsum aliqua aliqua ex sed elit laboris commodo ad incididunt. Magna ipsum enim lorem commodo quis ad commodo.\r\n\r\nDo magna laboris magna commodo aliquip ad incididunt quis ullamco nisi lorem incididunt ut consectetur. Aliqua ipsum minim dolor enim aliqua. Do commodo sit commodo elit dolor consectetur ut et ipsum ut.\r\n\r\nUllamco labore enim nostrud et ad nisi amet. Ad aliqua minim eiusmod ad incididunt ipsum et veniam ut amet magna consequat ad do. Ut exercitation commodo et ut aliquip. Ut ullamco amet ut consequat exercitation ut ea magna ex magna. Amet ullamco veniam nisi et ex exercitation nostrud. Ipsum dolore dolor elit minim dolor sit ipsum quis ut enim ad do.\r\n\r\nDo elit ut adipiscing et quis nostrud veniam incididunt elit. Aliquip enim lorem dolor consectetur ullamco aliqua tempor minim laboris dolore ex ut et. Laboris minim aliqua sed ea ea nisi quis. Consectetur ad aliquip nisi tempor magna eiusmod laboris tempor incididunt sit consectetur. Adipiscing ut elit tempor adipiscing commodo magna.\r\n\r\nEx commodo minim nisi magna sit ut. Dolor consequat laboris labore ipsum lorem ad veniam exercitation nisi laboris. Ad ipsum ullamco ut ut ut ad labore ea. Ut magna do do eiusmod eiusmod aliquip tempor ipsum ut ad ut do commodo.\r\n\r\nUt tempor et consectetur sed nostrud nostrud ullamco exercitation laboris aliquip minim adipiscing ad labore. Nisi ad laboris ut quis sed quis ut adipiscing nisi aliqua minim. Amet veniam ex tempor magna lorem elit et consectetur ex dolor aliquip. Ipsum labore enim ipsum nisi ipsum. Elit exercitation minim ut nisi consequat dolore consequat ut ipsum ullamco laboris sit.\r\n\r\nAliqua consectetur veniam aliquip minim ullamco adipiscing tempor minim ut nostrud consequat ut. Veniam ut dolor ut consequat exercitation. Exercitation ut dolore nisi exercitation ex commodo eiusmod labore ullamco. Ex ut do tempor adipiscing ipsum sit incididunt enim et ut magna consequat sed. Lorem incididunt et sed ipsum ad adipiscing laboris. Exercitation lorem quis eiusmod consectetur sit.\r\n\r\nSed eiusmod labore sit aliquip aliquip ad dolore. Nostrud veniam consequat incididunt sed ea exercitation. Ullamco labore exercitation amet ad enim do sit amet minim minim ut.\r\n\r\nEa aliquip ea et ipsum enim veniam consectetur ex et labore sed. Aliquip laboris sit lorem ut nisi aliqua sed aliquip do ea magna elit laboris. Labore quis do eiusmod amet exercitation ut sit laboris ut aliqua commodo ad et dolore.\r\n\r\nIncididunt ad ut dolor tempor nostrud ullamco. Laboris ut do tempor enim ut. Ipsum ad sit aliquip do sit laboris exercitation nisi dolor ex sed. Ex commodo nostrud quis ex enim veniam laboris ut lorem quis aliqua. Nostrud ut ut nisi aliquip elit magna do lorem et elit. Nisi consequat quis do ad quis amet exercitation labore ut nisi commodo.\r\n\r\nUt labore magna minim nostrud veniam ut quis do do lorem ut. Exercitation labore ut sed adipiscing enim incididunt veniam sit dolor magna ipsum magna aliquip. Consequat ipsum ipsum amet minim do aliquip ut eiusmod do dolor ut.\r\n\r\nAmet sit commodo laboris ut lorem ex. Ullamco minim nisi amet dolor laboris aliquip ullamco consectetur dolor commodo exercitation. Sed ullamco consectetur nisi do quis ipsum ea nisi amet. Elit quis aliquip enim lorem ex minim magna laboris lorem nostrud ut nostrud ut ut. Laboris aliquip veniam ut dolor ex sit incididunt ea.\r\n\r\nIpsum tempor quis sed aliqua laboris elit tempor. Enim ex ut laboris aliqua incididunt aliquip ea ut laboris. Incididunt dolor consectetur ut laboris tempor nisi magna aliquip. Tempor et exercitation et sed commodo do aliqua.\r\n\r\nUllamco minim ad do ea sed minim ex nisi consequat dolor nisi laboris. Quis do nostrud tempor nisi laboris amet. Ipsum sit ad consequat magna ea. Tempor ullamco commodo elit ut lorem ad aliquip ipsum et ut tempor sit aliquip.', NULL, 0),
 (7, 483, NULL, NULL, 2, '2025-10-07', NULL, NULL, NULL, 'In Progress', '2025-10-07 01:34:02', '2025-10-07 01:34:02', 'Cheating', NULL, NULL, NULL, NULL, 0),
-(8, 483, 7, NULL, 3, '2025-10-07', NULL, NULL, NULL, 'In Progress', '2025-10-07 01:35:05', '2025-10-07 01:35:05', 'Cheating', NULL, NULL, NULL, NULL, 0);
+(8, 483, 7, NULL, 3, '2025-10-07', NULL, NULL, NULL, 'In Progress', '2025-10-07 01:35:05', '2025-10-10 07:55:10', 'Cheating', NULL, NULL, 'Aliqua sed ad amet aliquip minim tempor labore et ut dolor. Incididunt consectetur sed incididunt adipiscing sit. Do magna commodo tempor aliqua aliqua. Magna commodo commodo ad do adipiscing ut adipiscing ad aliqua dolore aliquip aliqua lorem. Exercitation ad dolor dolore ea sed ut incididunt eiusmod consectetur enim ullamco laboris enim aliqua. Ad consectetur commodo minim ipsum ex do labore lorem elit sed sit ad.\r\n\r\nEa consectetur quis sed nostrud dolor tempor tempor enim quis sit lorem sed ullamco adipiscing. Ex minim aliquip ea ipsum consequat elit labore ad consectetur nisi sit veniam ex. Ut dolor enim aliquip commodo ullamco.\r\n\r\nAliqua aliquip ut do ea adipiscing ullamco tempor. Aliqua labore exercitation lorem consequat elit do et ut consequat amet magna aliqua. Nisi nostrud consectetur elit eiusmod ut nostrud lorem ea sed elit aliqua. Ad sit elit do laboris magna adipiscing laboris eiusmod elit.\r\n\r\nUt ad aliquip do consequat ex adipiscing ut ullamco enim. Et aliqua ipsum nisi incididunt ea veniam amet tempor nisi exercitation consequat ut ea lorem. Commodo aliqua ut elit minim ut labore dolore. Ut enim laboris sed quis ea do enim dolore adipiscing exercitation aliqua veniam. Ut ullamco labore do aliquip aliquip.\r\n\r\nEx eiusmod ullamco amet dolore et elit aliqua sed ut ea nisi dolor nostrud. Ad et lorem sit sed aliqua. Ut ex ullamco eiusmod dolor dolor ut quis labore elit laboris. Nostrud ad dolore ad do nostrud ex minim aliqua eiusmod commodo adipiscing ad nisi laboris.\r\n\r\nAd ut incididunt ad ea ullamco minim aliqua aliquip do ut labore ut dolor sit. Do ad aliqua et tempor consequat laboris quis ullamco incididunt enim magna veniam ut. Do ex adipiscing ut nisi magna ullamco ullamco do sed eiusmod sit.\r\n\r\nConsequat ipsum eiusmod aliquip consectetur quis ad. Labore nostrud tempor labore consectetur veniam. Ut lorem ut dolore ad dolore. Ut et quis magna ipsum aliqua aliqua ex sed elit laboris commodo ad incididunt. Magna ipsum enim lorem commodo quis ad commodo.\r\n\r\nDo magna laboris magna commodo aliquip ad incididunt quis ullamco nisi lorem incididunt ut consectetur. Aliqua ipsum minim dolor enim aliqua. Do commodo sit commodo elit dolor consectetur ut et ipsum ut.\r\n\r\nUllamco labore enim nostrud et ad nisi amet. Ad aliqua minim eiusmod ad incididunt ipsum et veniam ut amet magna consequat ad do. Ut exercitation commodo et ut aliquip. Ut ullamco amet ut consequat exercitation ut ea magna ex magna. Amet ullamco veniam nisi et ex exercitation nostrud. Ipsum dolore dolor elit minim dolor sit ipsum quis ut enim ad do.\r\n\r\nDo elit ut adipiscing et quis nostrud veniam incididunt elit. Aliquip enim lorem dolor consectetur ullamco aliqua tempor minim laboris dolore ex ut et. Laboris minim aliqua sed ea ea nisi quis. Consectetur ad aliquip nisi tempor magna eiusmod laboris tempor incididunt sit consectetur. Adipiscing ut elit tempor adipiscing commodo magna.\r\n\r\nEx commodo minim nisi magna sit ut. Dolor consequat laboris labore ipsum lorem ad veniam exercitation nisi laboris. Ad ipsum ullamco ut ut ut ad labore ea. Ut magna do do eiusmod eiusmod aliquip tempor ipsum ut ad ut do commodo.\r\n\r\nUt tempor et consectetur sed nostrud nostrud ullamco exercitation laboris aliquip minim adipiscing ad labore. Nisi ad laboris ut quis sed quis ut adipiscing nisi aliqua minim. Amet veniam ex tempor magna lorem elit et consectetur ex dolor aliquip. Ipsum labore enim ipsum nisi ipsum. Elit exercitation minim ut nisi consequat dolore consequat ut ipsum ullamco laboris sit.\r\n\r\nAliqua consectetur veniam aliquip minim ullamco adipiscing tempor minim ut nostrud consequat ut. Veniam ut dolor ut consequat exercitation. Exercitation ut dolore nisi exercitation ex commodo eiusmod labore ullamco. Ex ut do tempor adipiscing ipsum sit incididunt enim et ut magna consequat sed. Lorem incididunt et sed ipsum ad adipiscing laboris. Exercitation lorem quis eiusmod consectetur sit.\r\n\r\nSed eiusmod labore sit aliquip aliquip ad dolore. Nostrud veniam consequat incididunt sed ea exercitation. Ullamco labore exercitation amet ad enim do sit amet minim minim ut.\r\n\r\nEa aliquip ea et ipsum enim veniam consectetur ex et labore sed. Aliquip laboris sit lorem ut nisi aliqua sed aliquip do ea magna elit laboris. Labore quis do eiusmod amet exercitation ut sit laboris ut aliqua commodo ad et dolore.\r\n\r\nIncididunt ad ut dolor tempor nostrud ullamco. Laboris ut do tempor enim ut. Ipsum ad sit aliquip do sit laboris exercitation nisi dolor ex sed. Ex commodo nostrud quis ex enim veniam laboris ut lorem quis aliqua. Nostrud ut ut nisi aliquip elit magna do lorem et elit. Nisi consequat quis do ad quis amet exercitation labore ut nisi commodo.\r\n\r\nUt labore magna minim nostrud veniam ut quis do do lorem ut. Exercitation labore ut sed adipiscing enim incididunt veniam sit dolor magna ipsum magna aliquip. Consequat ipsum ipsum amet minim do aliquip ut eiusmod do dolor ut.\r\n\r\nAmet sit commodo laboris ut lorem ex. Ullamco minim nisi amet dolor laboris aliquip ullamco consectetur dolor commodo exercitation. Sed ullamco consectetur nisi do quis ipsum ea nisi amet. Elit quis aliquip enim lorem ex minim magna laboris lorem nostrud ut nostrud ut ut. Laboris aliquip veniam ut dolor ex sit incididunt ea.\r\n\r\nIpsum tempor quis sed aliqua laboris elit tempor. Enim ex ut laboris aliqua incididunt aliquip ea ut laboris. Incididunt dolor consectetur ut laboris tempor nisi magna aliquip. Tempor et exercitation et sed commodo do aliqua.\r\n\r\nUllamco minim ad do ea sed minim ex nisi consequat dolor nisi laboris. Quis do nostrud tempor nisi laboris amet. Ipsum sit ad consequat magna ea. Tempor ullamco commodo elit ut lorem ad aliquip ipsum et ut tempor sit aliquip.', NULL, 0),
+(9, 483, NULL, NULL, 3, '2025-10-10', NULL, NULL, NULL, 'In Progress', '2025-10-10 08:23:36', '2025-10-10 08:23:36', 'deloading', NULL, NULL, 'cmcm', NULL, 0),
+(10, 721, NULL, NULL, 3, '2025-10-11', NULL, NULL, NULL, 'In Progress', '2025-10-10 08:24:54', '2025-10-10 08:24:54', 'deloading', NULL, NULL, 'chdhhdu', NULL, 0),
+(11, 721, NULL, NULL, 3, '2025-10-10', NULL, 20, NULL, 'In Progress', '2025-10-10 08:27:28', '2025-10-10 08:27:28', 'Community Service', '2025-10-17', '2025-11-06', 'dfndksfdn', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -99,6 +102,15 @@ CREATE TABLE `contract_images` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `contract_images`
+--
+
+INSERT INTO `contract_images` (`id`, `contract_id`, `image_path`, `created_at`, `updated_at`) VALUES
+(1, 4, 'contract_images/zIKFhwP9sEbFwDrGmNvZxvLpjvmkvMPeq5Z3VMDv.png', '2025-10-10 08:20:35', '2025-10-10 08:20:35'),
+(3, 10, 'contract_images/fg2RSBArMiwDF9gnvII6XepRqP05e4BOmewqtOlN.jpg', '2025-10-10 08:26:37', '2025-10-10 08:26:37'),
+(4, 11, 'contract_images/Ckngz7sGs08sAGVxd1I7IV1r3VLFakdVaaAVjdlK.jpg', '2025-10-10 08:27:28', '2025-10-10 08:27:28');
 
 -- --------------------------------------------------------
 
@@ -141,7 +153,7 @@ CREATE TABLE `counselings` (
   `image_path` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `remarks` text DEFAULT NULL
+  `remarks` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -151,7 +163,7 @@ CREATE TABLE `counselings` (
 INSERT INTO `counselings` (`id`, `original_counseling_id`, `student_id`, `semester_id`, `counseling_date`, `status`, `image_path`, `created_at`, `updated_at`, `remarks`) VALUES
 (1, NULL, 566, 1, '2025-10-06', 'In Progress', NULL, '2025-10-07 00:38:33', '2025-10-07 00:38:33', NULL),
 (2, NULL, 509, 1, '2025-10-01', 'Completed', NULL, '2025-10-07 00:38:47', '2025-10-07 00:39:00', NULL),
-(3, 1, 566, 2, '2025-10-06', 'In Progress', NULL, '2025-10-07 00:45:41', '2025-10-07 00:45:41', NULL),
+(3, 1, 566, 2, '2025-10-06', 'In Progress', NULL, '2025-10-07 00:45:41', '2025-10-10 07:58:24', 'Aliqua sed ad amet aliquip minim tempor labore et ut dolor. Incididunt consectetur sed incididunt adipiscing sit. Do magna commodo tempor aliqua aliqua. Magna commodo commodo ad do adipiscing ut adipiscing ad aliqua dolore aliquip aliqua lorem. Exercitation ad dolor dolore ea sed ut incididunt eiusmod consectetur enim ullamco laboris enim aliqua. Ad consectetur commodo minim ipsum ex do labore lorem elit sed sit ad.\r\n\r\nEa consectetur quis sed nostrud dolor tempor tempor enim quis sit lorem sed ullamco adipiscing. Ex minim aliquip ea ipsum consequat elit labore ad consectetur nisi sit veniam ex. Ut dolor enim aliquip commodo ullamco.\r\n\r\nAliqua aliquip ut do ea adipiscing ullamco tempor. Aliqua labore exercitation lorem consequat elit do et ut consequat amet magna aliqua. Nisi nostrud consectetur elit eiusmod ut nostrud lorem ea sed elit aliqua. Ad sit elit do laboris magna adipiscing laboris eiusmod elit.\r\n\r\nUt ad aliquip do consequat ex adipiscing ut ullamco enim. Et aliqua ipsum nisi incididunt ea veniam amet tempor nisi exercitation consequat ut ea lorem. Commodo aliqua ut elit minim ut labore dolore. Ut enim laboris sed quis ea do enim dolore adipiscing exercitation aliqua veniam. Ut ullamco labore do aliquip aliquip.\r\n\r\nEx eiusmod ullamco amet dolore et elit aliqua sed ut ea nisi dolor nostrud. Ad et lorem sit sed aliqua. Ut ex ullamco eiusmod dolor dolor ut quis labore elit laboris. Nostrud ad dolore ad do nostrud ex minim aliqua eiusmod commodo adipiscing ad nisi laboris.\r\n\r\nAd ut incididunt ad ea ullamco minim aliqua aliquip do ut labore ut dolor sit. Do ad aliqua et tempor consequat laboris quis ullamco incididunt enim magna veniam ut. Do ex adipiscing ut nisi magna ullamco ullamco do sed eiusmod sit.\r\n\r\nConsequat ipsum eiusmod aliquip consectetur quis ad. Labore nostrud tempor labore consectetur veniam. Ut lorem ut dolore ad dolore. Ut et quis magna ipsum aliqua aliqua ex sed elit laboris commodo ad incididunt. Magna ipsum enim lorem commodo quis ad commodo.\r\n\r\nDo magna laboris magna commodo aliquip ad incididunt quis ullamco nisi lorem incididunt ut consectetur. Aliqua ipsum minim dolor enim aliqua. Do commodo sit commodo elit dolor consectetur ut et ipsum ut.\r\n\r\nUllamco labore enim nostrud et ad nisi amet. Ad aliqua minim eiusmod ad incididunt ipsum et veniam ut amet magna consequat ad do. Ut exercitation commodo et ut aliquip. Ut ullamco amet ut consequat exercitation ut ea magna ex magna. Amet ullamco veniam nisi et ex exercitation nostrud. Ipsum dolore dolor elit minim dolor sit ipsum quis ut enim ad do.\r\n\r\nDo elit ut adipiscing et quis nostrud veniam incididunt elit. Aliquip enim lorem dolor consectetur ullamco aliqua tempor minim laboris dolore ex ut et. Laboris minim aliqua sed ea ea nisi quis. Consectetur ad aliquip nisi tempor magna eiusmod laboris tempor incididunt sit consectetur. Adipiscing ut elit tempor adipiscing commodo magna.\r\n\r\nEx commodo minim nisi magna sit ut. Dolor consequat laboris labore ipsum lorem ad veniam exercitation nisi laboris. Ad ipsum ullamco ut ut ut ad labore ea. Ut magna do do eiusmod eiusmod aliquip tempor ipsum ut ad ut do commodo.\r\n\r\nUt tempor et consectetur sed nostrud nostrud ullamco exercitation laboris aliquip minim adipiscing ad labore. Nisi ad laboris ut quis sed quis ut adipiscing nisi aliqua minim. Amet veniam ex tempor magna lorem elit et consectetur ex dolor aliquip. Ipsum labore enim ipsum nisi ipsum. Elit exercitation minim ut nisi consequat dolore consequat ut ipsum ullamco laboris sit.\r\n\r\nAliqua consectetur veniam aliquip minim ullamco adipiscing tempor minim ut nostrud consequat ut. Veniam ut dolor ut consequat exercitation. Exercitation ut dolore nisi exercitation ex commodo eiusmod labore ullamco. Ex ut do tempor adipiscing ipsum sit incididunt enim et ut magna consequat sed. Lorem incididunt et sed ipsum ad adipiscing laboris. Exercitation lorem quis eiusmod consectetur sit.\r\n\r\nSed eiusmod labore sit aliquip aliquip ad dolore. Nostrud veniam consequat incididunt sed ea exercitation. Ullamco labore exercitation amet ad enim do sit amet minim minim ut.\r\n\r\nEa aliquip ea et ipsum enim veniam consectetur ex et labore sed. Aliquip laboris sit lorem ut nisi aliqua sed aliquip do ea magna elit laboris. Labore quis do eiusmod amet exercitation ut sit laboris ut aliqua commodo ad et dolore.\r\n\r\nIncididunt ad ut dolor tempor nostrud ullamco. Laboris ut do tempor enim ut. Ipsum ad sit aliquip do sit laboris exercitation nisi dolor ex sed. Ex commodo nostrud quis ex enim veniam laboris ut lorem quis aliqua. Nostrud ut ut nisi aliquip elit magna do lorem et elit. Nisi consequat quis do ad quis amet exercitation labore ut nisi commodo.\r\n\r\nUt labore magna minim nostrud veniam ut quis do do lorem ut. Exercitation labore ut sed adipiscing enim incididunt veniam sit dolor magna ipsum magna aliquip. Consequat ipsum ipsum amet minim do aliquip ut eiusmod do dolor ut.\r\n\r\nAmet sit commodo laboris ut lorem ex. Ullamco minim nisi amet dolor laboris aliquip ullamco consectetur dolor commodo exercitation. Sed ullamco consectetur nisi do quis ipsum ea nisi amet. Elit quis aliquip enim lorem ex minim magna laboris lorem nostrud ut nostrud ut ut. Laboris aliquip veniam ut dolor ex sit incididunt ea.\r\n\r\nIpsum tempor quis sed aliqua laboris elit tempor. Enim ex ut laboris aliqua incididunt aliquip ea ut laboris. Incididunt dolor consectetur ut laboris tempor nisi magna aliquip. Tempor et exercitation et sed commodo do aliqua.\r\n\r\nUllamco minim ad do ea sed minim ex nisi consequat dolor nisi laboris. Quis do nostrud tempor nisi laboris amet. Ipsum sit ad consequat magna ea. Tempor ullamco commodo elit ut lorem ad aliquip ipsum et ut tempor sit aliquip.'),
 (4, 2, 509, 2, '2025-10-01', 'Completed', NULL, '2025-10-07 00:47:33', '2025-10-07 00:47:33', NULL);
 
 -- --------------------------------------------------------
@@ -168,6 +180,14 @@ CREATE TABLE `counseling_images` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `type` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `counseling_images`
+--
+
+INSERT INTO `counseling_images` (`id`, `counseling_id`, `image_path`, `created_at`, `updated_at`, `type`) VALUES
+(1, 3, 'counseling_images/x7J4reWx93PHhgLO4h2oGDV1ctf4mkhm3imIsdgO.jpg', '2025-10-10 08:49:20', '2025-10-10 08:49:20', 'form'),
+(2, 3, 'counseling_images/5C6Zl6gMivESWgQXkhndtjwQbO3sKc1fIOYynxfY.jpg', '2025-10-10 08:49:31', '2025-10-10 08:49:31', 'id_card');
 
 -- --------------------------------------------------------
 
@@ -346,7 +366,7 @@ CREATE TABLE `referrals` (
   `student_id` bigint(20) UNSIGNED NOT NULL,
   `semester_id` bigint(20) UNSIGNED DEFAULT NULL,
   `reason` varchar(255) NOT NULL,
-  `remarks` varchar(255) DEFAULT NULL,
+  `remarks` longtext DEFAULT NULL,
   `image_path` varchar(255) DEFAULT NULL,
   `referral_date` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -361,9 +381,10 @@ INSERT INTO `referrals` (`id`, `original_referral_id`, `student_id`, `semester_i
 (1, NULL, 566, 1, 'Failing Grades', NULL, NULL, '2025-10-08', '2025-10-07 00:37:23', '2025-10-07 00:37:23'),
 (2, NULL, 566, 1, 'Failing Grades', NULL, NULL, '2025-10-08', '2025-10-07 00:37:25', '2025-10-07 00:37:25'),
 (3, NULL, 509, 1, 'Failing Grades', NULL, NULL, '2025-10-06', '2025-10-07 00:38:00', '2025-10-07 00:38:00'),
-(4, 1, 566, 2, 'Failing Grades', NULL, NULL, '2025-10-08', '2025-10-07 00:45:41', '2025-10-07 00:45:41'),
+(4, 1, 566, 2, 'Failing Grades', 'Aliqua sed ad amet aliquip minim tempor labore et ut dolor. Incididunt consectetur sed incididunt adipiscing sit. Do magna commodo tempor aliqua aliqua. Magna commodo commodo ad do adipiscing ut adipiscing ad aliqua dolore aliquip aliqua lorem. Exercitation ad dolor dolore ea sed ut incididunt eiusmod consectetur enim ullamco laboris enim aliqua. Ad consectetur commodo minim ipsum ex do labore lorem elit sed sit ad.\r\n\r\nEa consectetur quis sed nostrud dolor tempor tempor enim quis sit lorem sed ullamco adipiscing. Ex minim aliquip ea ipsum consequat elit labore ad consectetur nisi sit veniam ex. Ut dolor enim aliquip commodo ullamco.\r\n\r\nAliqua aliquip ut do ea adipiscing ullamco tempor. Aliqua labore exercitation lorem consequat elit do et ut consequat amet magna aliqua. Nisi nostrud consectetur elit eiusmod ut nostrud lorem ea sed elit aliqua. Ad sit elit do laboris magna adipiscing laboris eiusmod elit.\r\n\r\nUt ad aliquip do consequat ex adipiscing ut ullamco enim. Et aliqua ipsum nisi incididunt ea veniam amet tempor nisi exercitation consequat ut ea lorem. Commodo aliqua ut elit minim ut labore dolore. Ut enim laboris sed quis ea do enim dolore adipiscing exercitation aliqua veniam. Ut ullamco labore do aliquip aliquip.\r\n\r\nEx eiusmod ullamco amet dolore et elit aliqua sed ut ea nisi dolor nostrud. Ad et lorem sit sed aliqua. Ut ex ullamco eiusmod dolor dolor ut quis labore elit laboris. Nostrud ad dolore ad do nostrud ex minim aliqua eiusmod commodo adipiscing ad nisi laboris.\r\n\r\nAd ut incididunt ad ea ullamco minim aliqua aliquip do ut labore ut dolor sit. Do ad aliqua et tempor consequat laboris quis ullamco incididunt enim magna veniam ut. Do ex adipiscing ut nisi magna ullamco ullamco do sed eiusmod sit.\r\n\r\nConsequat ipsum eiusmod aliquip consectetur quis ad. Labore nostrud tempor labore consectetur veniam. Ut lorem ut dolore ad dolore. Ut et quis magna ipsum aliqua aliqua ex sed elit laboris commodo ad incididunt. Magna ipsum enim lorem commodo quis ad commodo.\r\n\r\nDo magna laboris magna commodo aliquip ad incididunt quis ullamco nisi lorem incididunt ut consectetur. Aliqua ipsum minim dolor enim aliqua. Do commodo sit commodo elit dolor consectetur ut et ipsum ut.\r\n\r\nUllamco labore enim nostrud et ad nisi amet. Ad aliqua minim eiusmod ad incididunt ipsum et veniam ut amet magna consequat ad do. Ut exercitation commodo et ut aliquip. Ut ullamco amet ut consequat exercitation ut ea magna ex magna. Amet ullamco veniam nisi et ex exercitation nostrud. Ipsum dolore dolor elit minim dolor sit ipsum quis ut enim ad do.\r\n\r\nDo elit ut adipiscing et quis nostrud veniam incididunt elit. Aliquip enim lorem dolor consectetur ullamco aliqua tempor minim laboris dolore ex ut et. Laboris minim aliqua sed ea ea nisi quis. Consectetur ad aliquip nisi tempor magna eiusmod laboris tempor incididunt sit consectetur. Adipiscing ut elit tempor adipiscing commodo magna.\r\n\r\nEx commodo minim nisi magna sit ut. Dolor consequat laboris labore ipsum lorem ad veniam exercitation nisi laboris. Ad ipsum ullamco ut ut ut ad labore ea. Ut magna do do eiusmod eiusmod aliquip tempor ipsum ut ad ut do commodo.\r\n\r\nUt tempor et consectetur sed nostrud nostrud ullamco exercitation laboris aliquip minim adipiscing ad labore. Nisi ad laboris ut quis sed quis ut adipiscing nisi aliqua minim. Amet veniam ex tempor magna lorem elit et consectetur ex dolor aliquip. Ipsum labore enim ipsum nisi ipsum. Elit exercitation minim ut nisi consequat dolore consequat ut ipsum ullamco laboris sit.\r\n\r\nAliqua consectetur veniam aliquip minim ullamco adipiscing tempor minim ut nostrud consequat ut. Veniam ut dolor ut consequat exercitation. Exercitation ut dolore nisi exercitation ex commodo eiusmod labore ullamco. Ex ut do tempor adipiscing ipsum sit incididunt enim et ut magna consequat sed. Lorem incididunt et sed ipsum ad adipiscing laboris. Exercitation lorem quis eiusmod consectetur sit.\r\n\r\nSed eiusmod labore sit aliquip aliquip ad dolore. Nostrud veniam consequat incididunt sed ea exercitation. Ullamco labore exercitation amet ad enim do sit amet minim minim ut.\r\n\r\nEa aliquip ea et ipsum enim veniam consectetur ex et labore sed. Aliquip laboris sit lorem ut nisi aliqua sed aliquip do ea magna elit laboris. Labore quis do eiusmod amet exercitation ut sit laboris ut aliqua commodo ad et dolore.\r\n\r\nIncididunt ad ut dolor tempor nostrud ullamco. Laboris ut do tempor enim ut. Ipsum ad sit aliquip do sit laboris exercitation nisi dolor ex sed. Ex commodo nostrud quis ex enim veniam laboris ut lorem quis aliqua. Nostrud ut ut nisi aliquip elit magna do lorem et elit. Nisi consequat quis do ad quis amet exercitation labore ut nisi commodo.\r\n\r\nUt labore magna minim nostrud veniam ut quis do do lorem ut. Exercitation labore ut sed adipiscing enim incididunt veniam sit dolor magna ipsum magna aliquip. Consequat ipsum ipsum amet minim do aliquip ut eiusmod do dolor ut.\r\n\r\nAmet sit commodo laboris ut lorem ex. Ullamco minim nisi amet dolor laboris aliquip ullamco consectetur dolor commodo exercitation. Sed ullamco consectetur nisi do quis ipsum ea nisi amet. Elit quis aliquip enim lorem ex minim magna laboris lorem nostrud ut nostrud ut ut. Laboris aliquip veniam ut dolor ex sit incididunt ea.\r\n\r\nIpsum tempor quis sed aliqua laboris elit tempor. Enim ex ut laboris aliqua incididunt aliquip ea ut laboris. Incididunt dolor consectetur ut laboris tempor nisi magna aliquip. Tempor et exercitation et sed commodo do aliqua.\r\n\r\nUllamco minim ad do ea sed minim ex nisi consequat dolor nisi laboris. Quis do nostrud tempor nisi laboris amet. Ipsum sit ad consequat magna ea. Tempor ullamco commodo elit ut lorem ad aliquip ipsum et ut tempor sit aliquip.', NULL, '2025-10-08', '2025-10-07 00:45:41', '2025-10-10 07:56:50'),
 (5, 2, 566, 2, 'Failing Grades', NULL, NULL, '2025-10-08', '2025-10-07 00:45:41', '2025-10-07 00:45:41'),
-(6, 3, 509, 2, 'Failing Grades', NULL, NULL, '2025-10-06', '2025-10-07 00:47:33', '2025-10-07 00:47:33');
+(6, 3, 509, 2, 'Failing Grades', NULL, NULL, '2025-10-06', '2025-10-07 00:47:33', '2025-10-07 00:47:33'),
+(7, NULL, 483, 3, 'Absences', NULL, NULL, '2025-10-10', '2025-10-10 08:40:05', '2025-10-10 08:40:05');
 
 -- --------------------------------------------------------
 
@@ -378,6 +399,14 @@ CREATE TABLE `referral_images` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `referral_images`
+--
+
+INSERT INTO `referral_images` (`id`, `referral_id`, `image_path`, `created_at`, `updated_at`) VALUES
+(1, 7, 'referral_images/MNFObHYk7okXwPwmx12EDTrFMaZBS9eWUz617aPP.jpg', '2025-10-10 08:40:05', '2025-10-10 08:40:05'),
+(2, 7, 'referral_images/d1irOTkATcP3IvjzfN6Q2egchEq5lEJTAiJ4TwI7.jpg', '2025-10-10 08:45:50', '2025-10-10 08:45:50');
 
 -- --------------------------------------------------------
 
@@ -494,8 +523,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('XBykUL6iOjkPddlBQUmREH6UCpFAdq7Le3OWNA6g', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiVDR3dHA5NXlvQXpObE9WVmdwVjdGTGFjYWtxakhNaDRBZVlGcnJnWSI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MjtzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozMDoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3NlbWVzdGVyIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1759831559),
-('ZYML7zObwJL5agbxagv73vkszj3Rwj8Du0MYP1Fl', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiSkUyYW5GWEVUZ2lTYTJEaVJUZEFRTEJEbHpGS1Q2TFdjbXNLYmxJOSI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MjtzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozMToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2NvbnRyYWN0cyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1760072968);
+('sQ11Qv2qlvuqZKwWKBcyTk5BPgZLe3eSyrFUkJ5D', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiQVZtcXZlWkxpV2pEOG5UOFFpV0RuN0ZOZVJDQk85VjFYU1RnUkFleCI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MjtzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozMToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2Rhc2hib2FyZCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1760119167);
 
 -- --------------------------------------------------------
 
@@ -2443,7 +2471,8 @@ INSERT INTO `student_profiles` (`id`, `student_id`, `semester_id`, `course`, `se
 (944, 886, 2, 'Associate in Computer Technology', 'B', '2025-10-07 00:46:51', '2025-10-07 00:46:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Grad', NULL),
 (945, 4, 2, 'ACT-AD', 'D', '2025-10-07 00:46:51', '2025-10-07 00:46:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', NULL),
 (946, 509, 2, 'BSCS', 'B', '2025-10-07 00:47:33', '2025-10-07 00:47:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '4', NULL),
-(947, 483, 3, 'BSCS', 'A', '2025-10-07 01:35:05', '2025-10-07 01:35:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '4', NULL);
+(947, 483, 3, 'BSCS', 'A', '2025-10-07 01:35:05', '2025-10-07 01:35:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '4', NULL),
+(948, 721, 3, 'BSIT', 'C', '2025-10-10 07:59:22', '2025-10-10 07:59:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '3', NULL);
 
 -- --------------------------------------------------------
 
@@ -2479,12 +2508,19 @@ CREATE TABLE `student_transition` (
   `reason_returning` text DEFAULT NULL,
   `leave_reason` text DEFAULT NULL,
   `transition_date` date NOT NULL,
-  `remark` text DEFAULT NULL,
+  `remark` longtext DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `semester_id` bigint(20) UNSIGNED DEFAULT NULL,
   `student_id` bigint(20) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `student_transition`
+--
+
+INSERT INTO `student_transition` (`id`, `original_transition_id`, `last_name`, `first_name`, `middle_name`, `transition_type`, `from_program`, `to_program`, `reason_leaving`, `reason_returning`, `leave_reason`, `transition_date`, `remark`, `created_at`, `updated_at`, `semester_id`, `student_id`) VALUES
+(1, NULL, 'AGRAVIADOR', 'ADRIAN', NULL, 'Returning Student', NULL, NULL, NULL, NULL, NULL, '2025-10-10', 'Aliqua sed ad amet aliquip minim tempor labore et ut dolor. Incididunt consectetur sed incididunt adipiscing sit. Do magna commodo tempor aliqua aliqua. Magna commodo commodo ad do adipiscing ut adipiscing ad aliqua dolore aliquip aliqua lorem. Exercitation ad dolor dolore ea sed ut incididunt eiusmod consectetur enim ullamco laboris enim aliqua. Ad consectetur commodo minim ipsum ex do labore lorem elit sed sit ad.\r\n\r\nEa consectetur quis sed nostrud dolor tempor tempor enim quis sit lorem sed ullamco adipiscing. Ex minim aliquip ea ipsum consequat elit labore ad consectetur nisi sit veniam ex. Ut dolor enim aliquip commodo ullamco.\r\n\r\nAliqua aliquip ut do ea adipiscing ullamco tempor. Aliqua labore exercitation lorem consequat elit do et ut consequat amet magna aliqua. Nisi nostrud consectetur elit eiusmod ut nostrud lorem ea sed elit aliqua. Ad sit elit do laboris magna adipiscing laboris eiusmod elit.\r\n\r\nUt ad aliquip do consequat ex adipiscing ut ullamco enim. Et aliqua ipsum nisi incididunt ea veniam amet tempor nisi exercitation consequat ut ea lorem. Commodo aliqua ut elit minim ut labore dolore. Ut enim laboris sed quis ea do enim dolore adipiscing exercitation aliqua veniam. Ut ullamco labore do aliquip aliquip.\r\n\r\nEx eiusmod ullamco amet dolore et elit aliqua sed ut ea nisi dolor nostrud. Ad et lorem sit sed aliqua. Ut ex ullamco eiusmod dolor dolor ut quis labore elit laboris. Nostrud ad dolore ad do nostrud ex minim aliqua eiusmod commodo adipiscing ad nisi laboris.\r\n\r\nAd ut incididunt ad ea ullamco minim aliqua aliquip do ut labore ut dolor sit. Do ad aliqua et tempor consequat laboris quis ullamco incididunt enim magna veniam ut. Do ex adipiscing ut nisi magna ullamco ullamco do sed eiusmod sit.\r\n\r\nConsequat ipsum eiusmod aliquip consectetur quis ad. Labore nostrud tempor labore consectetur veniam. Ut lorem ut dolore ad dolore. Ut et quis magna ipsum aliqua aliqua ex sed elit laboris commodo ad incididunt. Magna ipsum enim lorem commodo quis ad commodo.\r\n\r\nDo magna laboris magna commodo aliquip ad incididunt quis ullamco nisi lorem incididunt ut consectetur. Aliqua ipsum minim dolor enim aliqua. Do commodo sit commodo elit dolor consectetur ut et ipsum ut.\r\n\r\nUllamco labore enim nostrud et ad nisi amet. Ad aliqua minim eiusmod ad incididunt ipsum et veniam ut amet magna consequat ad do. Ut exercitation commodo et ut aliquip. Ut ullamco amet ut consequat exercitation ut ea magna ex magna. Amet ullamco veniam nisi et ex exercitation nostrud. Ipsum dolore dolor elit minim dolor sit ipsum quis ut enim ad do.\r\n\r\nDo elit ut adipiscing et quis nostrud veniam incididunt elit. Aliquip enim lorem dolor consectetur ullamco aliqua tempor minim laboris dolore ex ut et. Laboris minim aliqua sed ea ea nisi quis. Consectetur ad aliquip nisi tempor magna eiusmod laboris tempor incididunt sit consectetur. Adipiscing ut elit tempor adipiscing commodo magna.\r\n\r\nEx commodo minim nisi magna sit ut. Dolor consequat laboris labore ipsum lorem ad veniam exercitation nisi laboris. Ad ipsum ullamco ut ut ut ad labore ea. Ut magna do do eiusmod eiusmod aliquip tempor ipsum ut ad ut do commodo.\r\n\r\nUt tempor et consectetur sed nostrud nostrud ullamco exercitation laboris aliquip minim adipiscing ad labore. Nisi ad laboris ut quis sed quis ut adipiscing nisi aliqua minim. Amet veniam ex tempor magna lorem elit et consectetur ex dolor aliquip. Ipsum labore enim ipsum nisi ipsum. Elit exercitation minim ut nisi consequat dolore consequat ut ipsum ullamco laboris sit.\r\n\r\nAliqua consectetur veniam aliquip minim ullamco adipiscing tempor minim ut nostrud consequat ut. Veniam ut dolor ut consequat exercitation. Exercitation ut dolore nisi exercitation ex commodo eiusmod labore ullamco. Ex ut do tempor adipiscing ipsum sit incididunt enim et ut magna consequat sed. Lorem incididunt et sed ipsum ad adipiscing laboris. Exercitation lorem quis eiusmod consectetur sit.\r\n\r\nSed eiusmod labore sit aliquip aliquip ad dolore. Nostrud veniam consequat incididunt sed ea exercitation. Ullamco labore exercitation amet ad enim do sit amet minim minim ut.\r\n\r\nEa aliquip ea et ipsum enim veniam consectetur ex et labore sed. Aliquip laboris sit lorem ut nisi aliqua sed aliquip do ea magna elit laboris. Labore quis do eiusmod amet exercitation ut sit laboris ut aliqua commodo ad et dolore.\r\n\r\nIncididunt ad ut dolor tempor nostrud ullamco. Laboris ut do tempor enim ut. Ipsum ad sit aliquip do sit laboris exercitation nisi dolor ex sed. Ex commodo nostrud quis ex enim veniam laboris ut lorem quis aliqua. Nostrud ut ut nisi aliquip elit magna do lorem et elit. Nisi consequat quis do ad quis amet exercitation labore ut nisi commodo.\r\n\r\nUt labore magna minim nostrud veniam ut quis do do lorem ut. Exercitation labore ut sed adipiscing enim incididunt veniam sit dolor magna ipsum magna aliquip. Consequat ipsum ipsum amet minim do aliquip ut eiusmod do dolor ut.\r\n\r\nAmet sit commodo laboris ut lorem ex. Ullamco minim nisi amet dolor laboris aliquip ullamco consectetur dolor commodo exercitation. Sed ullamco consectetur nisi do quis ipsum ea nisi amet. Elit quis aliquip enim lorem ex minim magna laboris lorem nostrud ut nostrud ut ut. Laboris aliquip veniam ut dolor ex sit incididunt ea.\r\n\r\nIpsum tempor quis sed aliqua laboris elit tempor. Enim ex ut laboris aliqua incididunt aliquip ea ut laboris. Incididunt dolor consectetur ut laboris tempor nisi magna aliquip. Tempor et exercitation et sed commodo do aliqua.\r\n\r\nUllamco minim ad do ea sed minim ex nisi consequat dolor nisi laboris. Quis do nostrud tempor nisi laboris amet. Ipsum sit ad consequat magna ea. Tempor ullamco commodo elit ut lorem ad aliquip ipsum et ut tempor sit aliquip.', '2025-10-10 07:59:22', '2025-10-10 07:59:22', 3, 721);
 
 -- --------------------------------------------------------
 
@@ -2499,6 +2535,13 @@ CREATE TABLE `student_transition_images` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `student_transition_images`
+--
+
+INSERT INTO `student_transition_images` (`id`, `student_transition_id`, `image_path`, `created_at`, `updated_at`) VALUES
+(1, 1, 'transition_images/mJaK8tHUU9iNg7SXL2figTFd2hQ1uBOmK5r3cH9v.jpg', '2025-10-10 08:48:46', '2025-10-10 08:48:46');
 
 -- --------------------------------------------------------
 
@@ -2754,13 +2797,13 @@ ALTER TABLE `years`
 -- AUTO_INCREMENT for table `contracts`
 --
 ALTER TABLE `contracts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `contract_images`
 --
 ALTER TABLE `contract_images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `contract_types`
@@ -2778,7 +2821,7 @@ ALTER TABLE `counselings`
 -- AUTO_INCREMENT for table `counseling_images`
 --
 ALTER TABLE `counseling_images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `courses`
@@ -2808,13 +2851,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `referrals`
 --
 ALTER TABLE `referrals`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `referral_images`
 --
 ALTER TABLE `referral_images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `referral_reasons`
@@ -2850,7 +2893,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `student_profiles`
 --
 ALTER TABLE `student_profiles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=948;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=949;
 
 --
 -- AUTO_INCREMENT for table `student_semester_enrollments`
@@ -2862,13 +2905,13 @@ ALTER TABLE `student_semester_enrollments`
 -- AUTO_INCREMENT for table `student_transition`
 --
 ALTER TABLE `student_transition`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `student_transition_images`
 --
 ALTER TABLE `student_transition_images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`

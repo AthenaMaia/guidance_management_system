@@ -40,11 +40,11 @@
                         </label>
                     </div>
                     <button type="submit" class="sign-in-btn">Sign In</button>
-                    @if (Route::has('password.request'))
+                    {{-- @if (Route::has('password.request'))
                         <div class="forgot-password">
                             <a href="{{ route('password.request') }}">Forgot password?</a>
                         </div>
-                    @endif
+                    @endif --}}
                 </form>
             </div>
         </div>
