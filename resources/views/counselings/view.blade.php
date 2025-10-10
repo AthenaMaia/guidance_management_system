@@ -88,18 +88,23 @@
                            {{ $counseling->student->last_name }}, {{ $counseling->student->first_name }} {{ $counseling->student->middle_name }}. {{ $counseling->student->suffix }}
                         </span>
                     </div>
-                    <x-student-info label="Counseling Date" :value="\Carbon\Carbon::parse($counseling->counseling_date)->format('F j, Y')" />
-                </div>
+                    <x-student-info label="Student ID" :value="$counseling->student->student_id" />
+                                   </div>
                 <div>
                     @php
                         $profile = $counseling->student->profiles->where('semester_id', $counseling->semester_id)->first()
                             ?? $counseling->student->profiles->sortByDesc('semester_id')->first();
                     @endphp
-                    <div class="bg-gray-100 p-3 rounded shadow-sm">
-                        <span class="text-sm text-gray-500 font-medium">Course & Section</span><br>
-                        <span class="text-base font-bold text-red-700">
-                            {{ $profile?->course ?? 'N/A' }} {{ $profile?->year_level ?? '' }} {{ $profile?->section ?? '' }}
-                        </span>
+                    <div class="flex flex-col gap-3">
+                        
+                        <div class="bg-gray-100 p-3 rounded shadow-sm">
+                            <span class="text-sm text-gray-500 font-medium">Course & Section</span><br>
+                            <span class="text-base font-bold text-red-700">
+                                {{ $profile?->course ?? 'N/A' }} {{ $profile?->year_level ?? '' }} {{ $profile?->section ?? '' }}
+                            </span>
+                        </div>
+                         <x-student-info label="Counseling Date" :value="\Carbon\Carbon::parse($counseling->counseling_date)->format('F j, Y')" />
+
                     </div>
                 </div>
             </div>

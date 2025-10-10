@@ -88,6 +88,7 @@
                             {{ $contract->student->last_name }},{{ $contract->student->first_name }} {{ $contract->student->middle_name }}. {{ $contract->student->suffix }}
                         </span>
                     </div>
+                     <x-student-info label="Student ID" :value="$contract->student->student_id" />
                     <x-student-info label="Status" :value="$contract->status" />
                     <x-student-info label="Contract Date" :value="\Carbon\Carbon::parse($contract->contract_date)->format('F j, Y')" />
                     
