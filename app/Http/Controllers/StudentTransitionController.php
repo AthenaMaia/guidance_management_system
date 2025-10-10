@@ -99,7 +99,7 @@ public function index(Request $request)
         'transition_type' => 'required|in:None,Shifting In,Shifting Out,Transferring In,Transferring Out,Dropped,Returning Student,Graduated',
         //'transition_date' => 'required|date',
         'remark' => 'nullable|string',
-        'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
     ]);
 
     $activeSemester = Semester::where('is_current', true)->first();
@@ -208,7 +208,7 @@ public function updateRemarks(Request $request, $id)
 public function uploadImages(Request $request, $id)
 {
     $request->validate([
-        'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
     ]);
 
     $transition = StudentTransition::findOrFail($id);

@@ -93,8 +93,8 @@ public function store(Request $request)
     $validated = $request->validate([
         'student_id' => 'required|exists:students,id',
         'counseling_date' => 'required|date',
-        'form_images.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-        'id_images.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        'form_images.*' => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
+        'id_images.*' => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
          'remarks' => 'nullable|string|max:5000',
     ]);
 
@@ -169,7 +169,7 @@ public function store(Request $request)
 {
     $validated = $request->validate([
         'counseling_date' => 'required|date',
-        'image_path' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+        'image_path' => 'nullable|image|mimes:jpg,png,jpeg|max:5120',
     ]);
 
     if ($request->hasFile('image_path')) {
@@ -239,7 +239,7 @@ public function updateStatus(Request $request, $id)
             ->with('success', 'Carried over and marked as Completed.');
     }
 
-    // ✅ Regular update
+ 
     $counseling->status = $status;
     $counseling->save();
 
@@ -262,7 +262,7 @@ public function updateRemarks(Request $request, $id)
 public function uploadImages(Request $request, $id, $type)
 {
     $request->validate([
-        'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
     ]);
 
     $counseling = Counseling::findOrFail($id);
