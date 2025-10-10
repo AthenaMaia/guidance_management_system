@@ -68,7 +68,7 @@
                             </p>
                         </div>
 
-                    <div x-data="{ open: false, selected: 'all' }" class="relative">
+                    <div x-data="{ open: false, selected: 'all' }" class="relative" x-cloak>
                         <!-- Export Button -->
                         <button 
                             @click="open = true" 

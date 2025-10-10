@@ -7,7 +7,7 @@
      x-transition:leave-start="opacity-100"
      x-transition:leave-end="opacity-0"
      class="fixed inset-0 z-[9999] overflow-y-auto"
-     style="z-index: 9999;">
+     style="z-index: 9999;" >
     
     <!-- Backdrop -->
     <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" 

@@ -638,35 +638,47 @@ return !$hasCopyInCurrent && $semesterIds->contains($counseling->semester_id);
     ))->setPaper('a4', 'portrait');
 
     // Build dynamic filename
-$baseName = "Report_{$schoolYear->school_year}_{$semesterName}";
+$baseName = "{$schoolYear->school_year}_{$semesterName}";
 
 // Append based on selected tab and filters
 switch ($tab) {
     case 'contracts':
-        $type = $request->filter_contract_type ? str_replace(' ', '_', $request->filter_contract_type) : 'AllTypes';
-        $status = $request->filter_contract_status ? str_replace(' ', '_', $request->filter_contract_status) : 'AllStatus';
-        $baseName .= "_Contracts_{$type}_{$status}";
+        $course = $request->filter_course ? str_replace(' ', '_', $request->filter_course) : 'All Courses';
+        $year = $request->filter_year ? str_replace(' ', '_', $request->filter_year) : 'All Years';
+        $section = $request->filter_section ? str_replace(' ', '_', $request->filter_section) : 'All Sections';
+        $type = $request->filter_contract_type ? str_replace(' ', '_', $request->filter_contract_type) : 'All Types';
+        $status = $request->filter_contract_status ? str_replace(' ', '_', $request->filter_contract_status) : 'All Status';
+        $baseName .= "_Contracts_{$course}_{$year}_{$section}_{$type}_{$status}";
         break;
 
     case 'referrals':
+         $course = $request->filter_course ? str_replace(' ', '_', $request->filter_course) : 'All Courses';
+        $year = $request->filter_year ? str_replace(' ', '_', $request->filter_year) : 'All Years';
+        $section = $request->filter_section ? str_replace(' ', '_', $request->filter_section) : 'All Sections';
         $reason = $request->filter_reason ? str_replace(' ', '_', $request->filter_reason) : 'AllReasons';
-        $baseName .= "_Referrals_{$reason}";
+        $baseName .= "_Referrals_{$course}_{$year}_{$section}_{$reason}";
         break;
 
     case 'counseling':
+         $course = $request->filter_course ? str_replace(' ', '_', $request->filter_course) : 'All Courses';
+        $year = $request->filter_year ? str_replace(' ', '_', $request->filter_year) : 'All Years';
+        $section = $request->filter_section ? str_replace(' ', '_', $request->filter_section) : 'All Sections';
         $status = $request->filter_counseling_status ? str_replace(' ', '_', $request->filter_counseling_status) : 'AllStatus';
-        $baseName .= "_Counseling_{$status}";
+        $baseName .= "_Counseling_{$course}_{$year}_{$section}_{$status}";
         break;
 
     case 'transitions':
+         $course = $request->filter_course ? str_replace(' ', '_', $request->filter_course) : 'All Courses';
+        $year = $request->filter_year ? str_replace(' ', '_', $request->filter_year) : 'All Years';
+        $section = $request->filter_section ? str_replace(' ', '_', $request->filter_section) : 'All Sections';
         $type = $request->filter_transition_type ? str_replace(' ', '_', $request->filter_transition_type) : 'AllTypes';
-        $baseName .= "_Transitions_{$type}";
+        $baseName .= "_Transitions_{$course}_{$year}_{$section}_{$type}";
         break;
 
     case 'student_profiles':
-        $course = $request->filter_course ? str_replace(' ', '_', $request->filter_course) : 'AllCourses';
-        $year = $request->filter_year ? str_replace(' ', '_', $request->filter_year) : 'AllYears';
-        $section = $request->filter_section ? str_replace(' ', '_', $request->filter_section) : 'AllSections';
+        $course = $request->filter_course ? str_replace(' ', '_', $request->filter_course) : 'All Courses';
+        $year = $request->filter_year ? str_replace(' ', '_', $request->filter_year) : 'All Years';
+        $section = $request->filter_section ? str_replace(' ', '_', $request->filter_section) : 'All Sections';
         $baseName .= "_Profiles_{$course}_{$year}_{$section}";
         break;
 
@@ -835,34 +847,46 @@ return !$hasCarriedOver && $semesterIds->contains($counseling->semester_id);
     };
 
     // Build dynamic filename
-$baseName = "Report_{$schoolYear->school_year}_{$semesterName}";
+$baseName = "{$schoolYear->school_year}_{$semesterName}";
 
 switch ($tab) {
     case 'contracts':
-        $type = $request->filter_contract_type ? str_replace(' ', '_', $request->filter_contract_type) : 'AllTypes';
-        $status = $request->filter_contract_status ? str_replace(' ', '_', $request->filter_contract_status) : 'AllStatus';
-        $baseName .= "_Contracts_{$type}_{$status}";
+        $course = $request->filter_course ? str_replace(' ', '_', $request->filter_course) : 'All Courses';
+        $year = $request->filter_year ? str_replace(' ', '_', $request->filter_year) : 'All Years';
+        $section = $request->filter_section ? str_replace(' ', '_', $request->filter_section) : 'All Sections';
+        $type = $request->filter_contract_type ? str_replace(' ', '_', $request->filter_contract_type) : 'All Types';
+        $status = $request->filter_contract_status ? str_replace(' ', '_', $request->filter_contract_status) : 'All Status';
+        $baseName .= "_Contracts_{$course}_{$year}_{$section}_{$type}_{$status}";
         break;
 
     case 'referrals':
+         $course = $request->filter_course ? str_replace(' ', '_', $request->filter_course) : 'All Courses';
+        $year = $request->filter_year ? str_replace(' ', '_', $request->filter_year) : 'All Years';
+        $section = $request->filter_section ? str_replace(' ', '_', $request->filter_section) : 'All Sections';
         $reason = $request->filter_reason ? str_replace(' ', '_', $request->filter_reason) : 'AllReasons';
-        $baseName .= "_Referrals_{$reason}";
+        $baseName .= "_Referrals_{$course}_{$year}_{$section}_{$reason}";
         break;
 
     case 'counseling':
+         $course = $request->filter_course ? str_replace(' ', '_', $request->filter_course) : 'All Courses';
+        $year = $request->filter_year ? str_replace(' ', '_', $request->filter_year) : 'All Years';
+        $section = $request->filter_section ? str_replace(' ', '_', $request->filter_section) : 'All Sections';
         $status = $request->filter_counseling_status ? str_replace(' ', '_', $request->filter_counseling_status) : 'AllStatus';
-        $baseName .= "_Counseling_{$status}";
+        $baseName .= "_Counseling_{$course}_{$year}_{$section}_{$status}";
         break;
 
     case 'transitions':
+         $course = $request->filter_course ? str_replace(' ', '_', $request->filter_course) : 'All Courses';
+        $year = $request->filter_year ? str_replace(' ', '_', $request->filter_year) : 'All Years';
+        $section = $request->filter_section ? str_replace(' ', '_', $request->filter_section) : 'All Sections';
         $type = $request->filter_transition_type ? str_replace(' ', '_', $request->filter_transition_type) : 'AllTypes';
-        $baseName .= "_Transitions_{$type}";
+        $baseName .= "_Transitions_{$course}_{$year}_{$section}_{$type}";
         break;
 
     case 'student_profiles':
-        $course = $request->filter_course ? str_replace(' ', '_', $request->filter_course) : 'AllCourses';
-        $year = $request->filter_year ? str_replace(' ', '_', $request->filter_year) : 'AllYears';
-        $section = $request->filter_section ? str_replace(' ', '_', $request->filter_section) : 'AllSections';
+        $course = $request->filter_course ? str_replace(' ', '_', $request->filter_course) : 'All Courses';
+        $year = $request->filter_year ? str_replace(' ', '_', $request->filter_year) : 'All Years';
+        $section = $request->filter_section ? str_replace(' ', '_', $request->filter_section) : 'All Sections';
         $baseName .= "_Profiles_{$course}_{$year}_{$section}";
         break;
 
