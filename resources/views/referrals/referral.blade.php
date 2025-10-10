@@ -185,7 +185,7 @@
                 @endif
 
                 <!-- Referral Table -->
- <div class="overflow-x-auto md:overflow-x-visible rounded-lg border border-gray-200 mt-4">                        <table class="min-w-full divide-y divide-gray-200 text-sm">
+     <div class="overflow-x-auto md:overflow-x-visible rounded-lg border border-gray-200 mt-4">                        <table class="min-w-full divide-y divide-gray-200 text-sm">
                             <thead class="bg-gradient-to-r from-red-800 to-red-600 text-white text-left">
                                 <tr>
                                     <th class="px-4 py-3 font-semibold">Student ID</th>
@@ -195,6 +195,7 @@
                                     <th class="px-4 py-3 font-semibold">Section</th>
                                     <th class="px-4 py-3 font-semibold">Reason</th>
                                     <th class="px-4 py-3 font-semibold">Date</th>
+                                    <th class="px-4 py-3 font-semibold">Action </th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100 bg-white">
