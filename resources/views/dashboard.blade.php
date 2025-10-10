@@ -112,7 +112,7 @@
                             <i class="fas fa-user-graduate fa-2x"></i>
                         </div>
                         <div>
-                            <p class="text-gray-500 text-sm font-medium">Total Students</p>
+                            <p class="text-gray-500 text-sm font-medium">Students </p>
                             <h3 class="text-2xl font-bold">{{ $totalStudents ?? '0' }}</h3>
                         </div>
                     </div>
@@ -125,7 +125,7 @@
                             <i class="fas fa-file-contract fa-2x"></i>
                         </div>
                         <div>
-                            <p class="text-gray-500 text-sm font-medium">Total Contracts</p>
+                            <p class="text-gray-500 text-sm font-medium"> Contracts</p>
                             <h3 class="text-2xl font-bold">{{ $totalContracts ?? '0' }}</h3>
                         </div>
                     </div>
@@ -138,7 +138,7 @@
                             <i class="fas fa-handshake fa-2x"></i>
                         </div>
                         <div>
-                            <p class="text-gray-500 text-sm font-medium">Total Referrals</p>
+                            <p class="text-gray-500 text-sm font-medium"> Referrals</p>
                             <h3 class="text-2xl font-bold">{{ $totalReferrals ?? '0' }}</h3>
                         </div>
                     </div>
@@ -151,7 +151,7 @@
                             <i class="fas fa-comments fa-2x"></i>
                         </div>
                         <div>
-                            <p class="text-gray-500 text-sm font-medium">Total Counselings</p>
+                            <p class="text-gray-500 text-sm font-medium"> Counselings</p>
                             <h3 class="text-2xl font-bold">{{ $totalCounselings ?? '0' }}</h3>
                         </div>
                     </div>
@@ -343,7 +343,7 @@
             </div>
             <h3 class="font-bold text-gray-800 mb-1">Add New Student</h3>
             <p class="text-sm text-gray-600 mb-3">Register a new student in the system</p>
-            <a href="{{ route('student.create') }}" class="text-red-700 text-sm font-semibold hover:text-red-800 flex items-center">
+            <a href="{{ route('student.index') }}" class="text-red-700 text-sm font-semibold hover:text-red-800 flex items-center">
                 Add Student <i class="fas fa-arrow-right ml-1 text-xs"></i>
             </a>
         </div>
