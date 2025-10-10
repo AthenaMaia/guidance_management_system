@@ -178,13 +178,13 @@
                         <button type="button" @click="openCamera"
                                 class="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg w-32 h-32 hover:border-red-500 hover:bg-gray-50 transition">
                             <div class="text-3xl text-gray-400"></div>
-                            <span class="text-xs mt-1 text-gray-600">Take Photo</span>
+                            <span class="text-xs mt-1 text-gray-600">Scan</span>
                         </button>
 
                         <button type="button" @click="openGallery"
                                 class="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg w-32 h-32 hover:border-red-500 hover:bg-gray-50 transition">
                             <div class="text-3xl text-gray-400"></div>
-                            <span class="text-xs mt-1 text-gray-600">Choose Gallery</span>
+                            <span class="text-xs mt-1 text-gray-600">Gallery</span>
                         </button>
                     </div>
                 </form>
@@ -239,13 +239,13 @@
                         <button type="button" @click="openCamera"
                                 class="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg w-32 h-32 hover:border-red-500 hover:bg-gray-50 transition">
                             <div class="text-3xl text-gray-400"></div>
-                            <span class="text-xs mt-1 text-gray-600">Take Photo</span>
+                            <span class="text-xs mt-1 text-gray-600">Scan</span>
                         </button>
 
                         <button type="button" @click="openGallery"
                                 class="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg w-32 h-32 hover:border-red-500 hover:bg-gray-50 transition">
                             <div class="text-3xl text-gray-400"></div>
-                            <span class="text-xs mt-1 text-gray-600">Choose Gallery</span>
+                            <span class="text-xs mt-1 text-gray-600"> Gallery</span>
                         </button>
                     </div>
                 </form>
@@ -267,6 +267,7 @@
              class="w-full max-h-[80vh] object-contain rounded-lg border-4 border-white shadow-lg">
     </div>
 </div>
+<p x-show="errorMessage" x-text="errorMessage" class="text-xs text-red-600 mt-2"></p>
 
     </div>
 </x-app-layout>

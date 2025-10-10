@@ -179,14 +179,14 @@
     <div class="flex gap-4">
         <button type="button" @click="openCamera"
                 class="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg w-32 h-32 hover:border-red-500 hover:bg-gray-50 transition">
-            <div class="text-3xl text-gray-400">📷</div>
-            <span class="text-xs mt-1 text-gray-600">Take Photo</span>
+            <div class="text-3xl text-gray-400"></div>
+            <span class="text-xs mt-1 text-gray-600">Scan</span>
         </button>
 
         <button type="button" @click="openGallery"
                 class="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg w-32 h-32 hover:border-red-500 hover:bg-gray-50 transition">
-            <div class="text-3xl text-gray-400">🖼️</div>
-            <span class="text-xs mt-1 text-gray-600">Choose Gallery</span>
+            <div class="text-3xl text-gray-400"></div>
+            <span class="text-xs mt-1 text-gray-600">Gallery</span>
         </button>
     </div>
 
@@ -203,7 +203,7 @@
             </div>
         </template>
     </div>
-
+<p x-show="errorMessage" x-text="errorMessage" class="text-xs text-red-600 mt-2"></p>
     <p class="text-xs text-gray-500 mt-2">You can upload both front and back of the ID. Remove as needed.</p>
     @error('id_images')
         <p class="text-red-600 text-xs mt-1">{{ $message }}</p>

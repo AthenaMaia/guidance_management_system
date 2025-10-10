@@ -122,7 +122,7 @@
 
         <!-- Upload Image Options -->
         @if(empty($readonly))
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 col-span-full">
+     <div class="flex flex-wrap items-center  gap-3 col-span-full">
             <!-- Take Photo -->
             <form action="{{ route('referrals.uploadImages', ['id' => $referral->id, 'type' => 'referral']) }}"
                   method="POST"
@@ -138,7 +138,7 @@
                        onchange="this.form.submit()">
                 <div class="text-center">
                     <div class="text-3xl text-gray-500 mb-1"></div>
-                    <p class="text-sm text-gray-700">Take Photo</p>
+                    <p class="text-sm text-gray-700">Scan</p>
                 </div>
             </form>
 
@@ -157,10 +157,12 @@
                        onchange="this.form.submit()">
                 <div class="text-center">
                     <div class="text-3xl text-gray-500 mb-1"></div>
-                    <p class="text-sm text-gray-700">Choose from Gallery</p>
+                    <p class="text-sm text-gray-700"> Gallery</p>
                 </div>
             </form>
         </div>
+        
+<p x-show="errorMessage" x-text="errorMessage" class="text-xs text-red-600 mt-2"></p>
         @endif
     </div>
 </div>

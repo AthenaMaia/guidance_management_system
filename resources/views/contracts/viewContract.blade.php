@@ -185,7 +185,7 @@
                     </div>
                 @endforeach
 
-                <!-- Upload Buttons (if editable) -->
+                <!-- Upload Buttons  -->
                 @if(empty($readonly))
                     <!-- Camera -->
                     <form id="cameraForm" action="{{ route('contracts.uploadImages', ['id' => $contract->id, 'type' => 'contract']) }}" method="POST" enctype="multipart/form-data">
@@ -194,7 +194,7 @@
                             @change="handleFiles($event, 'cameraForm', 'cameraFinalInput')" multiple>
                         <label for="cameraInput"
                             class="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded h-36 cursor-pointer hover:bg-gray-100 transition text-sm text-center text-gray-600">
-                            <br>Take Photo
+                            <br>Scan
                         </label>
                         <input type="file" name="images[]" class="hidden" id="cameraFinalInput" multiple>
                     </form>
@@ -206,7 +206,7 @@
                             @change="handleFiles($event, 'galleryForm', 'galleryFinalInput')" multiple>
                         <label for="galleryInput"
                             class="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded h-36 cursor-pointer hover:bg-gray-100 transition text-sm text-center text-gray-600">
-                            <br>Choose from Gallery
+                            <br>Gallery
                         </label>
                         <input type="file" name="images[]" class="hidden" id="galleryFinalInput" multiple>
                     </form>
@@ -243,6 +243,8 @@
                             <img :src="zoomedImage" class="max-w-full max-h-[70vh] object-contain rounded-lg shadow-lg">
                         </div>
                     </div>
+
+                    <p x-show="errorMessage" x-text="errorMessage" class="text-xs text-red-600 mt-2"></p>
                 </div>
             </div>
         </div>

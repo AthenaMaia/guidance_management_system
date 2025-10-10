@@ -206,69 +206,69 @@
                     
                     <!-- File Upload with Preview -->
                     <div x-data="{
-    files: [],
-    handleFiles(event) {
-        const selectedFiles = Array.from(event.target.files);
-        selectedFiles.forEach(file => {
-            // Avoid duplicates using name + size
-            if (!this.files.some(f => f.file.name === file.name && f.file.size === file.size)) {
-                this.files.push({ file, url: URL.createObjectURL(file) });
-            }
-        });
-        this.syncFinalInput();
-    },
-    remove(index) {
-        this.files.splice(index, 1);
-        this.syncFinalInput();
-    },
-    syncFinalInput() {
-        const dataTransfer = new DataTransfer();
-        this.files.forEach(f => dataTransfer.items.add(f.file));
-        document.getElementById('finalInput').files = dataTransfer.files;
-    }
-}" class="space-y-2">
-    
-    <!-- Upload Options -->
-    <div class="flex gap-3">
-        <!-- Camera -->
-        <label for="cameraInput"
-            class="flex items-center justify-center border-2 border-dashed border-gray-300 rounded-lg w-32 h-32 cursor-pointer hover:border-red-500 hover:bg-red-50 transition">
-            <span class="text-xs text-center text-gray-500">Scan / Camera</span>
-        </label>
-        <input type="file" accept="image/*" capture="environment"
-            class="hidden" id="cameraInput" @change="handleFiles" multiple>
+                        files: [],
+                        handleFiles(event) {
+                            const selectedFiles = Array.from(event.target.files);
+                            selectedFiles.forEach(file => {
+                                // Avoid duplicates using name + size
+                                if (!this.files.some(f => f.file.name === file.name && f.file.size === file.size)) {
+                                    this.files.push({ file, url: URL.createObjectURL(file) });
+                                }
+                            });
+                            this.syncFinalInput();
+                        },
+                        remove(index) {
+                            this.files.splice(index, 1);
+                            this.syncFinalInput();
+                        },
+                        syncFinalInput() {
+                            const dataTransfer = new DataTransfer();
+                            this.files.forEach(f => dataTransfer.items.add(f.file));
+                            document.getElementById('finalInput').files = dataTransfer.files;
+                        }
+                    }" class="space-y-2">
+                        
+                        <!-- Upload Options -->
+                        <div class="flex gap-3">
+                            <!-- Camera -->
+                            <label for="cameraInput"
+                                class="flex items-center justify-center border-2 border-dashed border-gray-300 rounded-lg w-32 h-32 cursor-pointer hover:border-red-500 hover:bg-red-50 transition">
+                                <span class="text-xs text-center text-gray-500">Scan </span>
+                            </label>
+                            <input type="file" accept="image/*" capture="environment"
+                                class="hidden" id="cameraInput" @change="handleFiles" multiple>
 
-        <!-- Gallery -->
-        <label for="galleryInput"
-            class="flex items-center justify-center border-2 border-dashed border-gray-300 rounded-lg w-32 h-32 cursor-pointer hover:border-red-500 hover:bg-red-50 transition">
-            <span class="text-xs text-center text-gray-500">Gallery</span>
-        </label>
-        <input type="file" accept="image/*"
-            class="hidden" id="galleryInput" @change="handleFiles" multiple>
+                            <!-- Gallery -->
+                            <label for="galleryInput"
+                                class="flex items-center justify-center border-2 border-dashed border-gray-300 rounded-lg w-32 h-32 cursor-pointer hover:border-red-500 hover:bg-red-50 transition">
+                                <span class="text-xs text-center text-gray-500">Gallery</span>
+                            </label>
+                            <input type="file" accept="image/*"
+                                class="hidden" id="galleryInput" @change="handleFiles" multiple>
 
-        <!-- Final submission input -->
-        <input type="file" name="contract_images[]" id="finalInput" class="hidden" multiple>
-    </div>
+                            <!-- Final submission input -->
+                            <input type="file" name="contract_images[]" id="finalInput" class="hidden" multiple>
+                        </div>
 
-    <!-- Image Previews -->
-    <div x-show="files.length > 0" class="grid grid-cols-3 gap-3 mt-4" x-cloak>
-        <template x-for="(fileObj, index) in files" :key="index">
-            <div class="relative w-32 h-32">
-                <img :src="fileObj.url" class="object-cover w-full h-full rounded-lg border border-gray-300">
-                <button type="button"
-                    @click="remove(index)"
-                    class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm hover:bg-red-600 transition">
-                    ×
-                </button>
-            </div>
-        </template>
-    </div>
-
-    <p class="text-xs text-gray-500">You can select multiple images. Preview and remove them before submitting.</p>
-    @error('contract_images')
-        <p class="text-xs text-red-600 mt-1">{{ $message }}</p>
-    @enderror
-</div>
+                        <!-- Image Previews -->
+                        <div x-show="files.length > 0" class="grid grid-cols-3 gap-3 mt-4" x-cloak>
+                            <template x-for="(fileObj, index) in files" :key="index">
+                                <div class="relative w-32 h-32">
+                                    <img :src="fileObj.url" class="object-cover w-full h-full rounded-lg border border-gray-300">
+                                    <button type="button"
+                                        @click="remove(index)"
+                                        class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm hover:bg-red-600 transition">
+                                        ×
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+                        <p x-show="errorMessage" x-text="errorMessage" class="text-xs text-red-600 mt-2"></p>
+                        <p class="text-xs text-gray-500">You can select multiple images. Preview and remove them before submitting.</p>
+                        @error('contract_images')
+                            <p class="text-xs text-red-600 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
 
                     
                     
