@@ -95,7 +95,7 @@ public function store(Request $request)
         'counseling_date' => 'required|date',
         'form_images.*' => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
         'id_images.*' => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
-         'remarks' => 'nullable|string|max:5000',
+         'remarks' => 'nullable|string',
     ]);
 
     $activeSemester = Semester::where('is_current', true)->first();
