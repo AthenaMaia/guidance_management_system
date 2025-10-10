@@ -596,6 +596,7 @@
                                 <table class="min-w-full text-sm divide-y divide-gray-200">
                                     <thead class="bg-gray-50">
                                         <tr>
+                                            <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Student ID</th>
                                             <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Student</th>
                                             <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Type</th>
                                             <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Status</th>
@@ -608,6 +609,7 @@
                                     <tbody class="bg-white divide-y divide-gray-200">
                                         @forelse ($contracts as $contract)
                                             <tr class="hover:bg-gray-50">
+                                                  <td class="px-4 py-3">{{ $contract->student->student_id }}</td>
                                                 <td class="px-4 py-3 font-medium"> {{ $contract->student->last_name }},{{ $contract->student->first_name }} {{ $contract->student->middle_name }}.  {{ $contract->student->suffix }}
                                                      @if ($contract->original_contract_id)
                                                        <span class="px-2 py-1 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded-full">Carried Over</span>
@@ -661,6 +663,7 @@
                                 <table class="min-w-full text-sm divide-y divide-gray-200">
                                     <thead class="bg-gray-50">
                                         <tr>
+                                            <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Student ID</th>
                                             <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Student</th>
                                             <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Reason</th>
                                             <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Date</th>
@@ -670,6 +673,7 @@
                                     <tbody class="bg-white divide-y divide-gray-200">
                                         @forelse ($referrals as $referral)
                                             <tr class="hover:bg-gray-50">
+                                                  <td class="px-4 py-3">{{ $referral->student->student_id }}</td>
                                                 <td class="px-4 py-3 font-medium">{{ $referral->student->first_name }} {{ $referral->student->last_name }}</td>
                                                 <td class="px-4 py-3">{{ $referral->reason }}</td>
                                                 <td class="px-4 py-3">{{ $referral->referral_date }}</td>
@@ -709,6 +713,7 @@
                                 <table class="min-w-full text-sm divide-y divide-gray-200">
                                     <thead class="bg-gray-50">
                                         <tr>
+                                            <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Student ID</th>
                                             <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Student</th>
                                             <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Date</th>
                                             <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Status</th>
@@ -718,6 +723,7 @@
                                     <tbody class="bg-white divide-y divide-gray-200">
                                         @forelse ($counselings as $counseling)
                                             <tr class="hover:bg-gray-50">
+                                                  <td class="px-4 py-3">{{ $counseling->student->student_id }}</td>
                                                 <td class="px-4 py-3 font-medium">{{ $counseling->student->first_name }} {{ $counseling->student->last_name }}
                                                     @if ($counseling->original_counseling_id)
                                                         <span class="px-2 py-1 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded-full">Carried Over</span>
@@ -768,6 +774,7 @@
                                 <table class="min-w-full text-sm divide-y divide-gray-200">
                                     <thead class="bg-gray-50">
                                         <tr>
+                                            <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Student ID</th>
                                             <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Student</th>
                                             <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Type</th>
                                             <th class="px-4 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Date</th>
