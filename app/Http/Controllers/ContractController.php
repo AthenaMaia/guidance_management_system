@@ -125,7 +125,7 @@ public function store(Request $request)
         'contract_date' => 'required|date',
         'contract_type' => 'required|exists:contract_types,type',
         'remarks' => 'nullable|string|max:1000',
-        'contract_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'contract_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
         'status' => 'nullable|string',
     ];
 
@@ -387,7 +387,7 @@ public function updateStatus(Request $request, $id)
 public function uploadImages(Request $request, $id, $type)
 {
     $request->validate([
-        'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
     ]);
 
     $contract = Contract::findOrFail($id);

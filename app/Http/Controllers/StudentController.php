@@ -147,7 +147,7 @@ class StudentController extends Controller
          'transition_type' => 'nullable|in:Shifting In,Shifting Out,Transferring In,Transferring Out,Dropped,Returning Student,Graduated',
        // 'transition_date' => 'nullable|date|required_with:transition_type',
         'remark' => 'nullable|string|max:255',
-        'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
     ]);
 
     // Save the Student first (this goes to 'students' table)

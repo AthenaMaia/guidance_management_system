@@ -145,7 +145,7 @@ public function create()
         'reason'       => 'required|string|max:255',
         'remarks'      => 'nullable|string',
         'referral_date'=> 'required|date',
-        'image_path.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // for multiple files
+        'image_path.*' => 'nullable|image|mimes:jpeg,png,jpg|max:5120', // for multiple files
     ]);
 
     $activeSemester = Semester::where('is_current', true)->first();
@@ -194,7 +194,7 @@ public function update(Request $request, $id)
         'reason' => 'required|string|max:255',
         'remarks' => 'nullable|string',
         'referral_date' => 'required|date',
-        'image_path' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        'image_path' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
     ]);
 
     $referral = Referral::findOrFail($id);
@@ -251,7 +251,7 @@ public function updateRemarks(Request $request, $id)
 public function uploadImages(Request $request, $id, $type)
 {
     $request->validate([
-        'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
     ]);
 
     $referral = referral::findOrFail($id);
