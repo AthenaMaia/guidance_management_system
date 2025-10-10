@@ -1,0 +1,90 @@
+
+Project Setup & Dependencies
+
+1. Clone the Repository
+
+git clone https://github.com/your-username/your-repo.git
+cd your-repo
+
+2. Backend (Laravel / PHP) Setup
+
+Install PHP dependencies
+-composer install
+
+
+Check installed PHP packages
+
+composer show            # Shows all installed packages
+composer show --direct   # Shows only top-level packages
+
+
+Configure Environment
+
+1. Copy the example `.env` file:
+
+cp .env.example .env
+
+
+2. Update database credentials and other environment variables in `.env`.
+
+Generate Application Key
+-php artisan key:generate
+
+
+Run Migrations & Seeders
+
+php artisan migrate
+php artisan db:seed     
+
+
+3. Frontend (Node.js / Vite) Setup
+
+Install Node.js dependencies
+
+npm install
+ OR
+yarn install
+
+
+Check installed JS packages
+
+npm list --depth=0       # Shows top-level dependencies
+OR
+yarn list --depth=0
+
+
+Check `package.json`
+
+Open `package.json` to see frontend dependencies like `alpinejs`, `tailwindcss`, `axios`, etc.
+
+
+4. Running the Project
+
+Backend (Laravel):
+-php artisan serve
+
+This starts the backend at `http://127.0.0.1:8000`.
+
+Frontend (Vite):
+
+npm run dev
+OR
+yarn dev
+
+
+This starts Vite hot-reloading for your frontend assets.
+
+---
+
+5. Optional: Viewing Dependency Lists Together
+
+Backend: `composer show`
+Frontend: `npm list --depth=0`
+
+
+
+6. Notes
+
+* Make sure you have **PHP >= 8.x**, **Composer**, **Node.js**, and **npm or yarn** installed.
+* For first-time setup, ensure `.env` contains proper database, mail, and app settings.
+
