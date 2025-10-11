@@ -4,80 +4,150 @@
     </x-slot>
     
     <style>
-        /* Fix sidebar overlap issues */
-        @media (min-width: 768px) {
-            .main-content {
-                margin-left: 16rem !important; /* 16rem = 256px sidebar width */
-                width: calc(100% - 16rem) !important;
-            }
+    /* Sidebar Fix for Large Screens */
+    @media (min-width: 768px) {
+        .main-content {
+            margin-left: 16rem !important; /* Sidebar width */
+            width: calc(100% - 16rem) !important;
         }
-        
-        /* Enhanced table styling */
-        table {
-            border-collapse: separate;
-            border-spacing: 0;
+    }
+
+    /* Table Responsiveness */
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 0.5rem;
+        border: 1px solid #e5e7eb;
+    }
+
+    table {
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
+        min-width: 640px; /* Prevent squishing columns on mobile */
+    }
+
+    th, td {
+        white-space: nowrap;
+        text-align: left;
+    }
+
+    /* Responsive Header and Buttons */
+    @media (max-width: 640px) {
+        .header-flex {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .header-flex h1 {
+            font-size: 1.25rem;
+        }
+
+        .header-flex .button-group {
             width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
-        
-        /* Improve form controls */
-        input, select {
-            transition: all 0.2s ease;
+
+        .header-flex .button-group button {
+            flex: 1 1 auto;
+            justify-content: center;
         }
-        
-        /* Fix dropdown positioning */
-        .relative .absolute {
-            z-index: 50;
+    }
+
+    /* Form Fields Responsiveness */
+    input, select {
+        transition: all 0.2s ease;
+        width: 100%;
+    }
+
+    /* Dropdown Fix */
+    .relative .absolute {
+        z-index: 50;
+    }
+
+    /* Card Hover Effect */
+    .hover-card {
+        transition: all 0.3s ease;
+    }
+    .hover-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+                    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Status Badge */
+    .status-badge {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-weight: 600;
+        display: inline-block;
+    }
+    .active-badge {
+        background-color: #dcfce7;
+        color: #166534;
+    }
+    .inactive-badge {
+        background-color: #f3f4f6;
+        color: #4b5563;
+    }
+
+    /* Modal Responsiveness */
+    @media (max-width: 640px) {
+        .modal-box {
+            width: 90%;
+            max-width: 22rem;
+            padding: 1rem;
         }
-        
-        /* Card hover effect */
-        .hover-card {
-            transition: all 0.3s ease;
+    }
+
+    @media (min-width: 641px) and (max-width: 1023px) {
+        .modal-box {
+            width: 80%;
+            max-width: 28rem;
         }
-        .hover-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    @media (min-width: 1024px) {
+        .modal-box {
+            width: 100%;
+            max-width: 32rem;
         }
-        
-        /* Status badge styles */
-        .status-badge {
-            font-size: 0.75rem;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-weight: 600;
-        }
-        .active-badge {
-            background-color: #dcfce7;
-            color: #166534;
-        }
-        .inactive-badge {
-            background-color: #f3f4f6;
-            color: #4b5563;
-        }
-    </style>
+    }
+</style>
+
 
    <div class="" x-data="{ tab: '{{ session('tab', 'academic') }}' }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" x-data="{ openSemesterModal: false, openSchoolYearModal: false }">
             <div class="bg-white rounded-lg shadow-lg p-6 space-y-6">
 
-            @auth
+           @auth
                 @if(auth()->user()->isCounselor())
                     <!-- Tab Buttons -->
-                    <div class="flex border-b border-gray-200 mb-6">
+                    <div class="flex flex-wrap justify-center sm:justify-start border-b border-gray-200 mb-6 gap-2 sm:gap-0">
                         <button 
                             @click="tab = 'academic'" 
-                            :class="tab === 'academic' ? 'border-red-600 text-red-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
-                            class="whitespace-nowrap py-4 px-6 border-b-2 font-medium text-sm">
+                            :class="tab === 'academic' 
+                                ? 'border-red-600 text-red-600 bg-red-50 sm:bg-transparent' 
+                                : 'border-transparent text-gray-600 hover:text-gray-700 hover:border-gray-300'"
+                            class="w-full sm:w-auto py-2 sm:py-4 px-4 sm:px-6 border-b-2 font-medium text-sm rounded-md sm:rounded-none transition-all duration-200">
                             Academic Year Setup
                         </button>
+
                         <button 
                             @click="tab = 'accounts'" 
-                            :class="tab === 'accounts' ? 'border-red-600 text-red-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
-                            class="whitespace-nowrap py-4 px-6 border-b-2 font-medium text-sm">
+                            :class="tab === 'accounts' 
+                                ? 'border-red-600 text-red-600 bg-red-50 sm:bg-transparent' 
+                                : 'border-transparent text-gray-600 hover:text-gray-700 hover:border-gray-300'"
+                            class="w-full sm:w-auto py-2 sm:py-4 px-4 sm:px-6 border-b-2 font-medium text-sm rounded-md sm:rounded-none transition-all duration-200">
                             Account Management
                         </button>
                     </div>
                 @endif
             @endauth
+
 
             
             <!-- Academic Setup Content -->

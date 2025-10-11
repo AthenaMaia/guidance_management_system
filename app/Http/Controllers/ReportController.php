@@ -370,123 +370,116 @@ private function getLatestCarriedOverRecords($records, $semesterIds)
 
     public function view(Request $request, $student_id)
     {
-        $schoolYearId = $request->input('school_year_id');
-$semesterName = $request->input('semester_name');
+                $schoolYearId = $request->input('school_year_id');
+        $semesterName = $request->input('semester_name');
 
-$schoolYear = SchoolYear::find($schoolYearId);
-$schoolYearName = $schoolYear?->school_year ?? 'N/A';
+        $schoolYear = SchoolYear::find($schoolYearId);
+        $schoolYearName = $schoolYear?->school_year ?? 'N/A';
 
-        $student = Student::findOrFail($student_id);
+                $student = Student::findOrFail($student_id);
 
-        $semesters = Semester::query()
-            ->when($schoolYearId, fn($q) => $q->where('school_year_id', $schoolYearId))
-            ->when($semesterName, fn($q) => $q->where('semester', $semesterName))
-            ->get();
+                $semesters = Semester::query()
+                    ->when($schoolYearId, fn($q) => $q->where('school_year_id', $schoolYearId))
+                    ->when($semesterName, fn($q) => $q->where('semester', $semesterName))
+                    ->get();
 
-        $semesterIds = $semesters->pluck('id');
+                $semesterIds = $semesters->pluck('id');
 
-$allStudentContracts = Contract::with(['semester', 'images', 'original'])
-    ->where('student_id', $student_id)
-    ->get();
+            $allStudentContracts = Contract::with(['semester', 'images', 'original'])
+                ->where('student_id', $student_id)
+                ->get();
 
-$contracts = $allStudentContracts->filter(function ($contract) use ($semesterIds, $allStudentContracts, $request) {
-    if ($request->filled('filter_contract_type') && $contract->contract_type !== $request->filter_contract_type) {
-        return false;
-    }
-    if ($request->filled('filter_contract_status') && $contract->status !== $request->filter_contract_status) {
-        return false;
-    }
+            $contracts = $allStudentContracts->filter(function ($contract) use ($semesterIds, $allStudentContracts, $request) {
+                if ($request->filled('filter_contract_type') && $contract->contract_type !== $request->filter_contract_type) {
+                    return false;
+                }
+                if ($request->filled('filter_contract_status') && $contract->status !== $request->filter_contract_status) {
+                    return false;
+                }
 
-    $originalId = $contract->original_contract_id ?? $contract->id;
+                $originalId = $contract->original_contract_id ?? $contract->id;
 
-    // Always include if this contract belongs to the selected semester
-    if ($semesterIds->contains($contract->semester_id)) {
-        return true;
-    }
+                
+                if ($semesterIds->contains($contract->semester_id)) {
+                   
+                    return true;
+                }
 
-    // If this is the original and not carried over yet, include it
-    if (is_null($contract->original_contract_id)) {
-        $hasCopyInSelectedSemester = $allStudentContracts->contains(function ($c) use ($originalId, $semesterIds) {
-            return $c->original_contract_id == $originalId && $semesterIds->contains($c->semester_id);
-        });
+             
+                return false;
+            });
 
-        return !$hasCopyInSelectedSemester;
-    }
-
-    // Otherwise, it's a carried-over contract but not in selected semester → exclude
-    return false;
-});
 
 
 
 
         $referrals = Referral::with('semester', 'images')
-    ->where('student_id', $student_id)
-    ->whereIn('semester_id', $semesterIds)
-    ->when($request->filled('filter_reason'), fn($q) => $q->where('reason', $request->filter_reason))
-    ->get();
-
-
-$allStudentCounselings = Counseling::with(['semester', 'images', 'original'])
-    ->where('student_id', $student_id)
-    ->get();
-
-$counselings = $allStudentCounselings->filter(function ($counseling) use ($semesterIds, $allStudentCounselings, $request) {
-    if ($request->filled('filter_counseling_status') && $counseling->status !== $request->filter_counseling_status) return false;
-
-    $originalId = $counseling->original_counseling_id ?? $counseling->id;
-
-    if (!is_null($counseling->original_counseling_id)) {
-        return $semesterIds->contains($counseling->semester_id);
-    }
-
-    $hasCarriedOver = $allStudentCounselings->contains(function ($c) use ($originalId, $semesterIds) {
-        return $c->original_counseling_id == $originalId && $semesterIds->contains($c->semester_id);
-    });
-
-    return !$hasCarriedOver && $semesterIds->contains($counseling->semester_id);
-});
-
-
-$allStudentTransitions = StudentTransition::with(['semester', 'original'])
-    ->where('student_id', $student_id)
-    ->get();
-$transitions = $allStudentTransitions->filter(function ($transition) use ($semesterIds, $allStudentTransitions, $request) {
-    if ($request->filled('filter_transition_type') && $transition->transition_type !== $request->filter_transition_type) {
-        return false;
-    }
-
-    $originalId = $transition->original_transition_id ?? $transition->id;
-
-    // If this is a carried-over record, keep only if it belongs to selected semesters
-    if (!is_null($transition->original_transition_id)) {
-        return $semesterIds->contains($transition->semester_id);
-    }
-
-    // If this is the original and hasn't been carried over yet to selected semester, include
-    $hasCarriedOver = $allStudentTransitions->contains(function ($t) use ($originalId, $semesterIds) {
-        return $t->original_transition_id == $originalId && $semesterIds->contains($t->semester_id);
-    });
-
-    return !$hasCarriedOver && $semesterIds->contains($transition->semester_id);
-});
-
-
-
-        $profile = StudentProfile::where('student_id', $student_id)
+            ->where('student_id', $student_id)
             ->whereIn('semester_id', $semesterIds)
-            ->latest()
-            ->first(); 
-
-            $contractTypesList = ContractType::all();
-$referralReasons = ReferralReason::all();
+            ->when($request->filled('filter_reason'), fn($q) => $q->where('reason', $request->filter_reason))
+            ->get();
 
 
-        return view('reports.view_student_records', compact(
-    'student', 'contracts', 'referrals', 'counselings',
-    'schoolYearName', 'semesterName','transitions', 'profile' ,'contractTypesList',
-    'referralReasons'
-));
+        $allStudentCounselings = Counseling::with(['semester', 'images', 'original'])
+            ->where('student_id', $student_id)
+            ->get();
+
+        $counselings = $allStudentCounselings->filter(function ($counseling) use ($semesterIds, $allStudentCounselings, $request) {
+            if ($request->filled('filter_counseling_status') && $counseling->status !== $request->filter_counseling_status) return false;
+
+            $originalId = $counseling->original_counseling_id ?? $counseling->id;
+
+            if (!is_null($counseling->original_counseling_id)) {
+                return $semesterIds->contains($counseling->semester_id);
+            }
+
+            $hasCarriedOver = $allStudentCounselings->contains(function ($c) use ($originalId, $semesterIds) {
+                return $c->original_counseling_id == $originalId && $semesterIds->contains($c->semester_id);
+            });
+
+            return !$hasCarriedOver && $semesterIds->contains($counseling->semester_id);
+        });
+
+
+        $allStudentTransitions = StudentTransition::with(['semester', 'original'])
+            ->where('student_id', $student_id)
+            ->get();
+        $transitions = $allStudentTransitions->filter(function ($transition) use ($semesterIds, $allStudentTransitions, $request) {
+            if ($request->filled('filter_transition_type') && $transition->transition_type !== $request->filter_transition_type) {
+                return false;
+            }
+
+            $originalId = $transition->original_transition_id ?? $transition->id;
+
+            // If this is a carried-over record, keep only if it belongs to selected semesters
+            if (!is_null($transition->original_transition_id)) {
+                return $semesterIds->contains($transition->semester_id);
+            }
+
+            // If this is the original and hasn't been carried over yet to selected semester, include
+            $hasCarriedOver = $allStudentTransitions->contains(function ($t) use ($originalId, $semesterIds) {
+                return $t->original_transition_id == $originalId && $semesterIds->contains($t->semester_id);
+            });
+
+            return !$hasCarriedOver && $semesterIds->contains($transition->semester_id);
+        });
+
+
+
+                $profile = StudentProfile::where('student_id', $student_id)
+                    ->whereIn('semester_id', $semesterIds)
+                    ->latest()
+                    ->first(); 
+
+                    $contractTypesList = ContractType::all();
+        $referralReasons = ReferralReason::all();
+
+
+                return view('reports.view_student_records', compact(
+            'student', 'contracts', 'referrals', 'counselings',
+            'schoolYearName', 'semesterName','transitions', 'profile' ,'contractTypesList',
+            'referralReasons'
+        ));
 
 
     }

@@ -97,29 +97,29 @@ x-init="
 
 
         </div>
-{{-- Success and Error Flash Messages --}}
-@if (session('success'))
-    <div class="mb-4 px-4 py-3 bg-green-100 border border-green-300 text-green-800 rounded">
-        {{ session('success') }}
-    </div>
-@endif
+            {{-- Success and Error Flash Messages --}}
+            @if (session('success'))
+                <div class="mb-4 px-4 py-3 bg-green-100 border border-green-300 text-green-800 rounded">
+                    {{ session('success') }}
+                </div>
+            @endif
 
-@if (session('error'))
-    <div class="mb-4 px-4 py-3 bg-red-100 border border-red-300 text-red-800 rounded">
-        {{ session('error') }}
-    </div>
-@endif
+            @if (session('error'))
+                <div class="mb-4 px-4 py-3 bg-red-100 border border-red-300 text-red-800 rounded">
+                    {{ session('error') }}
+                </div>
+            @endif
 
-@if ($errors->any())
-    <div class="mb-4 px-4 py-3 bg-red-100 border border-red-300 text-red-800 rounded">
-        <strong>There were some issues with your submission:</strong>
-        <ul class="list-disc pl-5 mt-2 text-sm">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+            @if ($errors->any())
+                <div class="mb-4 px-4 py-3 bg-red-100 border border-red-300 text-red-800 rounded">
+                    <strong>There were some issues with your submission:</strong>
+                    <ul class="list-disc pl-5 mt-2 text-sm">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
             <h2 class="text-2xl font-semibold text-gray-700 mb-4">Validate Students from Previous Semesters</h2>
             <p class="text-gray-500 mb-6">
@@ -128,64 +128,101 @@ x-init="
             </p>
 
             <!-- FILTER FORM -->
-            <form method="GET" action="{{ route('semester.validate', $newSemester->id) }}" @submit.prevent="injectHiddenInputs($el); $el.submit()">
+            <form method="GET" action="{{ route('semester.validate', $newSemester->id) }}"
+                @submit.prevent="injectHiddenInputs($el); $el.submit()"
+                class="w-full">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
 
-                    <div>
+                    <!-- Course -->
+                    <div class="flex flex-col">
                         <label class="text-sm font-medium text-gray-600">Course</label>
-                        <select name="filter_course"  @change.prevent="if (warnIfSelected()) $el.form.requestSubmit()" class="w-full mt-1 border-gray-300 rounded">
+                        <select name="filter_course"
+                                @change.prevent="if (warnIfSelected()) $el.form.requestSubmit()"
+                                class="w-full mt-1 border border-gray-300 rounded-lg px-2 py-1.5 text-sm">
                             <option value="">All Courses</option>
                             @foreach($courses as $course)
-                                <option value="{{ $course->course }}" {{ request('filter_course') == $course->course ? 'selected' : '' }}>{{ $course->course }}</option>
+                                <option value="{{ $course->course }}" {{ request('filter_course') == $course->course ? 'selected' : '' }}>
+                                    {{ $course->course }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
-                    <div>
+
+                    <!-- Year Level -->
+                    <div class="flex flex-col">
                         <label class="text-sm font-medium text-gray-600">Year Level</label>
-                        <select name="filter_year_level"  @change.prevent="if (warnIfSelected()) $el.form.requestSubmit()" class="w-full mt-1 border-gray-300 rounded">
+                        <select name="filter_year_level"
+                                @change.prevent="if (warnIfSelected()) $el.form.requestSubmit()"
+                                class="w-full mt-1 border border-gray-300 rounded-lg px-2 py-1.5 text-sm">
                             <option value="">All Years</option>
                             @foreach($years as $year)
-                                <option value="{{ $year->year_level }}" {{ request('filter_year_level') == $year->year_level ? 'selected' : '' }}>{{ $year->year_level }}</option>
+                                <option value="{{ $year->year_level }}" {{ request('filter_year_level') == $year->year_level ? 'selected' : '' }}>
+                                    {{ $year->year_level }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
-                    <div>
+
+                    <!-- Section -->
+                    <div class="flex flex-col">
                         <label class="text-sm font-medium text-gray-600">Section</label>
-                        <select name="filter_section"  @change.prevent="if (warnIfSelected()) $el.form.requestSubmit()" class="w-full mt-1 border-gray-300 rounded">
+                        <select name="filter_section"
+                                @change.prevent="if (warnIfSelected()) $el.form.requestSubmit()"
+                                class="w-full mt-1 border border-gray-300 rounded-lg px-2 py-1.5 text-sm">
                             <option value="">All Sections</option>
                             @foreach($sections as $section)
-                                <option value="{{ $section->section }}" {{ request('filter_section') == $section->section ? 'selected' : '' }}>{{ $section->section }}</option>
+                                <option value="{{ $section->section }}" {{ request('filter_section') == $section->section ? 'selected' : '' }}>
+                                    {{ $section->section }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
-                    <div>
-                    <div>
+
+                    <!-- Transition Type -->
+                    <div class="flex flex-col">
                         <label class="text-sm font-medium text-gray-600">Transition Type</label>
-                        <select name="filter_transition_type"  @change.prevent="if (warnIfSelected()) $el.form.requestSubmit()" class="w-full mt-1 border-gray-300 rounded">
+                        <select name="filter_transition_type"
+                                @change.prevent="if (warnIfSelected()) $el.form.requestSubmit()"
+                                class="w-full mt-1 border border-gray-300 rounded-lg px-2 py-1.5 text-sm">
                             <option value="">All Types</option>
                             <option value="Shifting In" {{ request('filter_transition_type') == 'Shifting In' ? 'selected' : '' }}>Shifting In</option>
                             <option value="Shifting Out" {{ request('filter_transition_type') == 'Shifting Out' ? 'selected' : '' }}>Shifting Out</option>
                             <option value="Transferring Out" {{ request('filter_transition_type') == 'Transferring Out' ? 'selected' : '' }}>Transferring Out</option>
                             <option value="Dropped" {{ request('filter_transition_type') == 'Dropped' ? 'selected' : '' }}>Dropped</option>
                             <option value="Returning Student" {{ request('filter_transition_type') == 'Returning Student' ? 'selected' : '' }}>Returning Student</option>
-                             <option value="Graduated" {{ request('filter_transition_type') == 'Graduated' ? 'selected' : '' }}>Graduated</option>
+                            <option value="Graduated" {{ request('filter_transition_type') == 'Graduated' ? 'selected' : '' }}>Graduated</option>
                         </select>
                     </div>
-                    </div>
-                    <div class="col-span-2">
-                        <label class="text-sm font-medium text-gray-600">Search</label>
-                        <input type="text"
-    name="search"
-    value="{{ request('search') }}"
-    placeholder="Search by student ID or name"
-    class="w-full mt-1 border-gray-300 rounded"
-   @keydown.enter.prevent="if (warnIfSelected()) { injectHiddenInputs($el.form); $el.form.submit() }"
->
 
-                    </div>
+                    
+
                 </div>
+                    <!-- Search -->
+                    <div class="flex flex-col sm:col-span-2 md:col-span-3 lg:col-span-1 mt-3">
+                    <label class="text-sm font-medium text-gray-600">Search</label>
+                    <input type="text"
+                        name="search"
+                        value="{{ request('search') }}"
+                        placeholder="Search by student ID or name"
+                        class="w-full mt-1 border border-gray-300 rounded-lg px-3 py-1.5 text-sm"
+                        @keydown.enter.prevent="
+                            if (warnIfSelected()) { 
+                                injectHiddenInputs($el.form); 
+                                $el.form.submit();
+                            }
+                        "
+                        @input="
+                            if ($el.value === '') {
+                                injectHiddenInputs($el.form);
+                                $el.form.requestSubmit();
+                            }
+                        "
+                    >
+                </div>
+
                 <div id="selected-hidden"></div>
             </form>
+
 
             <!-- VALIDATION FORM -->
             <form id="validateForm" method="POST" enctype="multipart/form-data" action="{{ route('semester.processValidate', $newSemester->id) }}" @submit="injectHiddenInputs($el)">
