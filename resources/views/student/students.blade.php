@@ -103,7 +103,7 @@
                         placeholder="Search by ID or Name"
                         class="w-full mt-1 rounded-md border-gray-300 text-sm px-3 py-2"
                         onkeydown="if (event.key === 'Enter') this.form.submit();"
-                        oninput="this.form.requestSubmit()" />
+                        oninput="if (this.value.trim() === '') this.form.submit();" />
                 </div>
             </form>
 
