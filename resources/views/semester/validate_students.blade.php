@@ -199,14 +199,27 @@ x-init="
                 </div>
                     <!-- Search -->
                     <div class="flex flex-col sm:col-span-2 md:col-span-3 lg:col-span-1 mt-3">
-                        <label class="text-sm font-medium text-gray-600">Search</label>
-                        <input type="text"
-                            name="search"
-                            value="{{ request('search') }}"
-                            placeholder="Search by student ID or name"
-                            class="w-full mt-1 border border-gray-300 rounded-lg px-3 py-1.5 text-sm"
-                            @keydown.enter.prevent="if (warnIfSelected()) { injectHiddenInputs($el.form); $el.form.submit() }">
-                    </div>
+                    <label class="text-sm font-medium text-gray-600">Search</label>
+                    <input type="text"
+                        name="search"
+                        value="{{ request('search') }}"
+                        placeholder="Search by student ID or name"
+                        class="w-full mt-1 border border-gray-300 rounded-lg px-3 py-1.5 text-sm"
+                        @keydown.enter.prevent="
+                            if (warnIfSelected()) { 
+                                injectHiddenInputs($el.form); 
+                                $el.form.submit();
+                            }
+                        "
+                        @input="
+                            if ($el.value === '') {
+                                injectHiddenInputs($el.form);
+                                $el.form.requestSubmit();
+                            }
+                        "
+                    >
+                </div>
+
                 <div id="selected-hidden"></div>
             </form>
 
