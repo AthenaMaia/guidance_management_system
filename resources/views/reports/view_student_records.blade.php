@@ -199,8 +199,8 @@
                                             <td class="px-4 py-2">{{ \Carbon\Carbon::parse($contract->contract_date)->format('F j, Y') }}</td>
                                             <td class="px-4 py-2">{{ $contract->contract_type }}
                                                 @if ($contract->original_contract_id)
-    <span class="badge bg-yellow-200 text-yellow-800">Carried Over</span>
-@endif
+                                                <span class="badge bg-yellow-200 text-yellow-800">Carried Over</span>
+                                            @endif
 
                                             </td>
                                             <td class="px-4 py-2">{{ $contract->status }}</td>
