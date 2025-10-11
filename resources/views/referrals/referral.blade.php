@@ -120,12 +120,12 @@
 
                             <!-- Search -->
                             <div class="md:w-64 w-full">
-                                <label class="block text-sm text-gray-700 mb-1">Search:</label>
+                                <label class="block text-sm font-semibold text-gray-700">Search</label>
                                 <input type="text" name="search" value="{{ request('search') }}"
-                                       placeholder="Search by ID or Name"
-                                       class="border-gray-300 rounded-lg px-3 py-2 text-sm w-full focus:ring focus:ring-red-200 focus:border-red-500 transition"
-                                       onkeydown="if (event.key === 'Enter') this.form.submit();"
-                                       oninput="this.form.requestSubmit()" />
+                                    placeholder="Search by ID or Name"
+                                    class="w-full mt-1 rounded-md border-gray-300 text-sm px-3 py-2"
+                                    onkeydown="if (event.key === 'Enter') this.form.submit();"
+                                    oninput="if (this.value.trim() === '') this.form.submit();" />
                             </div>
                         </form>
 
@@ -190,9 +190,9 @@
                                 <tr>
                                     <th class="px-4 py-3 font-semibold">Student ID</th>
                                     <th class="px-4 py-3 font-semibold">Student</th>
-                                    <th class="px-4 py-3 font-semibold">Course</th>
+                                    {{-- <th class="px-4 py-3 font-semibold">Course</th>
                                     <th class="px-4 py-3 font-semibold">Year</th>
-                                    <th class="px-4 py-3 font-semibold">Section</th>
+                                    <th class="px-4 py-3 font-semibold">Section</th> --}}
                                     <th class="px-4 py-3 font-semibold">Reason</th>
                                     <th class="px-4 py-3 font-semibold">Date</th>
                                     <th class="px-4 py-3 font-semibold">Action </th>
@@ -207,9 +207,9 @@
                                     <tr class="table-row-hover">
                                         <td class="px-4 py-3 font-medium text-gray-800">{{ $referral->student->student_id }}</td>
                                         <td class="px-4 py-3">{{ $referral->student->last_name }},{{ $referral->student->first_name }} {{ $referral->student->middle_name }}. {{ $referral->student->suffix }}</td>
-                                        <td class="px-4 py-3">{{ $profile?->course ?? 'N/A' }}</td>
+                                        {{-- <td class="px-4 py-3">{{ $profile?->course ?? 'N/A' }}</td>
                                         <td class="px-4 py-3">{{ $profile?->year_level ?? 'N/A' }}</td>
-                                        <td class="px-4 py-3">{{ $profile?->section ?? 'N/A' }}</td>
+                                        <td class="px-4 py-3">{{ $profile?->section ?? 'N/A' }}</td> --}}
                                         <td class="px-4 py-3">
                                             <span class="status-badge reason-badge">
                                                 {{ $referral->reason }}

@@ -149,12 +149,12 @@
 
                                 <!-- Search -->
                                 <div class="md:w-64 w-full">
-                                    <label class="block text-sm text-gray-700 mb-1">Search:</label>
+                                    <label class="block text-sm font-semibold text-gray-700">Search</label>
                                     <input type="text" name="search" value="{{ request('search') }}"
-                                           placeholder="Search by ID or Name"
-                                           class="border-gray-300 rounded-lg px-3 py-2 text-sm w-full focus:ring focus:ring-red-200 focus:border-red-500 transition"
-                                           onkeydown="if (event.key === 'Enter') this.form.submit();"
-                                           oninput="this.form.requestSubmit()" />
+                                        placeholder="Search by ID or Name"
+                                        class="w-full mt-1 rounded-md border-gray-300 text-sm px-3 py-2"
+                                        onkeydown="if (event.key === 'Enter') this.form.submit();"
+                                        oninput="if (this.value.trim() === '') this.form.submit();" />
                                 </div>
                             </form>
 
