@@ -11,7 +11,36 @@
                 width: calc(100% - 16rem) !important;
             }
         }
-        
+
+    @media print {
+    /* Hide everything except the report */
+    body * { visibility: hidden; }
+    #reportContent, #reportContent * { visibility: visible; }
+
+    #reportContent { position: absolute; top: 0; left: 0; width: 100%; }
+
+    /* Ensure charts scale correctly */
+    canvas {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 350px !important;
+        page-break-inside: avoid !important;
+    }
+
+    .chart-card { page-break-inside: avoid !important; }
+
+    /* Page breaks between major sections */
+    .page-break { page-break-before: always !important; }
+
+    /* Responsive layout keeps grid intact in portrait/landscape */
+    @page { size: auto; margin: 10mm; }
+
+    /* Optional: force landscape if needed */
+    /* @page { size: landscape; } */
+}
+
+
+
         /* Enhanced table styling */
         table {
             border-collapse: separate;
@@ -40,13 +69,17 @@
         }
     </style>
     
-    @php $activeTab = request('tab', 'student_profiles'); @endphp
+    @php 
+        $activeTab = request('tab', 'student_profiles');
+         $view = request('view', 'reports'); 
+    @endphp
     <div class="py-1">
         <div class="max-w-9xl mx-auto sm:px-4 lg:px-8">
             <div class="bg-white rounded-lg shadow-sm">
                 <div class="p-3 space-y-4">
                 
                     <!-- Title & Description -->
+                       <div id="reportContent">
                     <div class="border-b border-gray-200 pb-4 mb-6">
                         <h1 class="text-2xl font-bold text-red-700 mb-2 flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -68,7 +101,7 @@
                             </p>
                         </div>
 
-                    <div x-data="{ open: false, selected: 'all' }" class="relative" x-cloak>
+                     <div x-data="{ open: false, selected: 'all' }" class="relative" x-cloak>
                         <!-- Export Button -->
                         <button 
                             @click="open = true" 
@@ -101,6 +134,7 @@
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                                         <!-- School Year -->
+                                  
                                         <div>
                                             <label class="block text-sm font-medium text-gray-700">School Year</label>
                                             <select name="school_year_id" class="form-select w-full rounded border-gray-300">
@@ -268,9 +302,201 @@
                             </button>
                         </form>
                     </div>
-                    
+                   
+                    <!-- Top-Level Tabs: Reports | History -->
+                <div class="border-b border-gray-300 mt-2">
+                    <div class="flex space-x-6">
+
+                        <!-- Reports Tab -->
+                        <a href="{{ request()->fullUrlWithQuery(['view' => 'reports']) }}"
+                            class="py-2 px-1 border-b-2 text-sm font-semibold
+                            {{ request('view', 'reports') === 'reports' ? 'border-red-700 text-red-700' : 'border-transparent text-gray-600 hover:text-red-700' }}">
+                            Reports
+                        </a>
+
+                        <!-- History Tab -->
+                        <a href="{{ request()->fullUrlWithQuery(['view' => 'history']) }}"
+                            class="py-2 px-1 border-b-2 text-sm font-semibold
+                            {{ request('view', 'reports') === 'history' ? 'border-red-700 text-red-700' : 'border-transparent text-gray-600 hover:text-red-700' }}">
+                            History
+                        </a>
+
+                    </div>
+                </div>
+             @if ($view === 'reports')
+                <div class="mt-6">
+                    <!-- Print Button -->
+                    <div class="flex justify-end mb-4">
+                        <button onclick="window.print()" class="px-4 py-2 bg-red-700 text-white font-semibold rounded shadow hover:bg-red-800 transition">
+                            Print Report
+                        </button>
+                    </div>
+
+                 
+                        <!-- Dashboard Summary Cards -->
+                        <h2 class="text-xl font-bold text-gray-800 mb-4">Summary</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            @foreach ([
+                                'Total Students' => $totalStudents, 
+                                'Contracts' => $totalContracts, 
+                                'Referrals' => $totalReferrals, 
+                                'Counseling Sessions' => $totalCounselings
+                            ] as $title => $value)
+                                <div class="p-4 bg-white shadow rounded-lg flex flex-col items-center justify-center">
+                                    <p class="text-sm text-gray-600">{{ $title }}</p>
+                                    <p class="text-2xl font-bold text-red-700">{{ $value }}</p>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="page-break"></div>
+                        <!-- Students Analytics -->
+                        <h2 class="text-xl font-bold text-gray-800 my-6">Students Analytics</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                            @foreach ([
+                                'Students by Course' => 'studentsByCourseChart',
+                                'Students by Year' => 'studentsByYearChart',
+                                'Students by Section' => 'studentsBySectionChart'
+                            ] as $title => $id)
+                                <div class="bg-white p-4 rounded shadow chart-card">
+                                    <h3 class="font-semibold mb-2">{{ $title }}</h3>
+                                    <canvas id="{{ $id }}"></canvas>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="page-break"></div>
+                        <!-- Contracts Analytics -->
+                        <h2 class="text-xl font-bold text-gray-800 my-6">Contracts Analytics</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                            <div class="bg-white p-4 rounded shadow chart-card md:col-span-1">
+                                <h3 class="font-semibold mb-2">Students with Contracts</h3>
+                                <canvas id="studentsWithContractsChart" class="h-96 w-full"></canvas>
+                            </div>
+
+                            <div class="bg-white p-4 rounded shadow chart-card md:col-span-2">
+                                <h3 class="font-semibold mb-2">Contracts by Type & Status</h3>
+                                <canvas id="contractsByTypeStatusChart" class="h-96 w-full"></canvas>
+                            </div>
+                        </div>
+                        <div class="page-break"></div>
+                        <!-- Counseling Analytics -->
+                        <h2 class="text-xl font-bold text-gray-800 my-6">Counseling Analytics</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+
+                            <!-- Counseling Trend by Month (bigger card) -->
+                            <div class="bg-white p-4 rounded shadow chart-card md:col-span-2">
+                                <h3 class="font-semibold mb-2">Counseling Trend by Month</h3>
+                                <canvas id="counselingTrendChart"></canvas>
+                            </div>
+
+                            <!-- Counseling Status (smaller card) -->
+                            <div class="bg-white p-4 rounded shadow chart-card md:col-span-1">
+                                <h3 class="font-semibold mb-2">Counseling Status</h3>
+                                <canvas id="counselingStatusChart"></canvas>
+                            </div>
+                        </div>
+
+
+                        <div class="page-break"></div>
+                        <!-- Referrals & Student Movements Analytics -->
+                        <h2 class="text-xl font-bold text-gray-800 my-6">Referrals & Student Movements</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            @foreach ([
+                                'Referral Reasons Distribution' => 'referralReasonsChart',
+                                'Student Movement Breakdown' => 'studentMovementChart'
+                            ] as $title => $id)
+                                <div class="bg-white p-4 rounded shadow chart-card">
+                                    <h3 class="font-semibold mb-2">{{ $title }}</h3>
+                                    <canvas id="{{ $id }}"></canvas>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                <script>
+                    const colors = ['#a82323','#f59e0b','#3b82f6','#10b981','#8b5cf6','#ec4899'];
+
+                    window.onbeforeprint = () => {
+                        document.querySelectorAll('canvas').forEach(c => { c.style.height = '350px'; });
+                    };
+                    window.onafterprint = () => {
+                        document.querySelectorAll('canvas').forEach(c => { c.style.height = ''; });
+                    };
+
+                    const chartData = {
+                        studentsByCourse: @json($studentsByCourse),
+                        studentsByYear: @json($studentsByYear),
+                        studentsBySection: @json($studentsBySection),
+                        contractsByType: @json($contractsByType),
+                        contractStatus: @json($contractStatus),
+                        studentsContracts: @json($studentsContractsData),
+                        contractsByTypeStatus: @json($contractsByTypeStatus),
+                        counselingTrend: @json($counselingTrend),
+                        counselingStatus: @json($counselingStatus),
+                        referralReasons: @json($referralReasonsDistribution),
+                        studentMovement: @json($studentMovement)
+                    };
+
+                    function createBarChart(ctxId, dataObj, colorIdx=0) {
+                        return new Chart(document.getElementById(ctxId), {
+                            type: 'bar',
+                            data: { labels: Object.keys(dataObj), datasets: [{ label: 'Count', data: Object.values(dataObj), backgroundColor: colors[colorIdx % colors.length] }] },
+                            options: { responsive: true, plugins: { legend: { display: false } } }
+                        });
+                    }
+
+                    function createPieChart(ctxId, dataObj) {
+                        return new Chart(document.getElementById(ctxId), {
+                            type: 'pie',
+                            data: { labels: Object.keys(dataObj), datasets: [{ data: Object.values(dataObj), backgroundColor: colors }] },
+                            options: { responsive: true }
+                        });
+                    }
+
+                    // Students Charts
+                    createBarChart('studentsByCourseChart', chartData.studentsByCourse, 0);
+                    createBarChart('studentsByYearChart', chartData.studentsByYear, 1);
+                    createBarChart('studentsBySectionChart', chartData.studentsBySection, 2);
+
+                    // Contracts Charts
+                    createPieChart('contractStatusChart', chartData.contractStatus);
+                    createPieChart('studentsWithContractsChart', chartData.studentsContracts);
+
+                    // Contracts by Type & Status (Stacked Bar)
+                    const types = Object.keys(chartData.contractsByTypeStatus);
+                    const statuses = [...new Set([].concat(...Object.values(chartData.contractsByTypeStatus).map(v => Object.keys(v))))];
+                    const stackedDatasets = statuses.map((status, i) => ({
+                        label: status,
+                        data: types.map(type => chartData.contractsByTypeStatus[type][status] ?? 0),
+                        backgroundColor: colors[i % colors.length]
+                    }));
+                    new Chart(document.getElementById('contractsByTypeStatusChart'), {
+                        type: 'bar',
+                        data: { labels: types, datasets: stackedDatasets },
+                        options: { responsive: true, plugins: { legend: { position: 'top' } }, scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true } } }
+                    });
+
+                    // Counseling Charts
+                    new Chart(document.getElementById('counselingTrendChart'), {
+                        type: 'line',
+                        data: { labels: Object.keys(chartData.counselingTrend).map(m => `Month ${m}`), datasets: [{ label: 'Counseling Sessions', data: Object.values(chartData.counselingTrend), borderColor: colors[0], backgroundColor: colors[0], fill: false, tension: 0.3 }] },
+                        options: { responsive: true }
+                    });
+                    createPieChart('counselingStatusChart', chartData.counselingStatus);
+
+                    // Referrals & Movements Charts
+                    createPieChart('referralReasonsChart', chartData.referralReasons);
+                    createPieChart('studentMovementChart', chartData.studentMovement);
+
+                </script>
+                @endif
+
+
+                @if ($view === 'history')
                     {{-- Tabs --}}
-                    <div class="flex flex-wrap gap-2 mb-4 overflow-x-auto">
+                    <div class="flex flex-wrap gap-2 mb-4 overflow-x-auto mt-2">
                         @foreach([
                             'student_profiles' => 'Student Profiles',
                             'contracts' => 'Contracts',
@@ -287,44 +513,6 @@
                     </div>
 
 
-                    {{-- Summary Cards --}}
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                        @if( $activeTab === 'student_profiles')
-                            <div class="bg-white border rounded shadow p-4 stat-card">
-                                <p class="text-sm text-gray-500">Total Students</p>
-                                <h3 class="text-2xl font-bold text-gray-800">{{ $totalStudents ?? 0 }}</h3>
-                            </div>
-                        @endif
-
-                        @if( $activeTab === 'contracts')
-                            <div class="bg-white border rounded shadow p-4 stat-card">
-                                <p class="text-sm text-gray-500">Total Contracts</p>
-                                <h3 class="text-2xl font-bold text-gray-800">{{ $totalContracts ?? 0 }}</h3>
-                            </div>
-                        @endif
-
-                        @if( $activeTab === 'referrals')
-                            <div class="bg-white border rounded shadow p-4 stat-card">
-                                <p class="text-sm text-gray-500">Total Referrals</p>
-                                <h3 class="text-2xl font-bold text-gray-800">{{ $totalReferrals ?? 0 }}</h3>
-                            </div>
-                        @endif
-
-                        @if($activeTab === 'counseling')
-                            <div class="bg-white border rounded shadow p-4 stat-card">
-                                <p class="text-sm text-gray-500">Total Counseling</p>
-                                <h3 class="text-2xl font-bold text-gray-800">{{ $totalCounselings ?? 0 }}</h3>
-                            </div>
-                        @endif
-
-                        @if( $activeTab === 'transitions')
-                            <div class="bg-white border rounded shadow p-4 stat-card">
-                                <p class="text-sm text-gray-500">Total Transitions</p>
-                                <h3 class="text-2xl font-bold text-gray-800">{{ $totalTransitions ?? 0 }}</h3>
-                            </div>
-                        @endif
-                    </div>
-
                     <!-- Filters section -->
                     @if($activeTab === 'student_profiles')
                     
@@ -334,8 +522,8 @@
                             <input type="hidden" name="tab" value="student_profiles">
 
                             <input type="text" name="search_student" value="{{ request('search_student') }}"
-    placeholder="Search by Student Name or ID"
-    class="border px-3 py-2 rounded w-full sm:w-auto focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50" />
+                             placeholder="Search by Student Name or ID"
+                            class="border px-3 py-2 rounded w-full sm:w-auto focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50" />
 
                             <select name="filter_course" class="border px-3 py-2 rounded w-full sm:w-auto focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50">
                                 <option value="">All Courses</option>
@@ -379,9 +567,9 @@
                         <input type="hidden" name="school_year_id" value="{{ $selectedSY }}">
                         <input type="hidden" name="semester_name" value="{{ $selectedSem }}">
                         <input type="hidden" name="tab" value="contracts">
-<input type="text" name="search_contract" value="{{ request('search_contract') }}"
-    placeholder="Search by Student Name or ID"
-    class="border px-3 py-2 rounded w-full sm:w-auto focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50" />
+                        <input type="text" name="search_contract" value="{{ request('search_contract') }}"
+                        placeholder="Search by Student Name or ID"
+                           class="border px-3 py-2 rounded w-full sm:w-auto focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50" />
 
                         <select name="filter_contract_type" class="border px-3 py-2 rounded w-full sm:w-auto focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50">
                             <option value="">All Types</option>
@@ -415,8 +603,8 @@
                         <input type="hidden" name="tab" value="referrals">
 
                         <input type="text" name="search_referral" value="{{ request('search_referral') }}"
-    placeholder="Search by Student Name or ID"
-    class="border px-3 py-2 rounded w-full sm:w-auto focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50" />
+                           placeholder="Search by Student Name or ID"
+                            class="border px-3 py-2 rounded w-full sm:w-auto focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50" />
 
                         <select name="filter_reason" class="border px-3 py-2 rounded w-full sm:w-auto focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50">
                             <option value="">All Reasons</option>
@@ -444,8 +632,8 @@
                         <input type="hidden" name="tab" value="counseling">
 
                         <input type="text" name="search_counseling" value="{{ request('search_counseling') }}"
-    placeholder="Search by Student Name or ID"
-    class="border px-3 py-2 rounded w-full sm:w-auto focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50" />
+                          placeholder="Search by Student Name or ID"
+                         class="border px-3 py-2 rounded w-full sm:w-auto focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50" />
 
                         <select name="filter_counseling_status" class="border px-3 py-2 rounded w-full sm:w-auto focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50">
                             <option value="">All Status</option>
@@ -470,8 +658,8 @@
                         <input type="hidden" name="tab" value="transitions">
 
                         <input type="text" name="search_transition" value="{{ request('search_transition') }}"
-    placeholder="Search by Student Name or ID"
-    class="border px-3 py-2 rounded w-full sm:w-auto focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50" />
+                           placeholder="Search by Student Name or ID"
+                            class="border px-3 py-2 rounded w-full sm:w-auto focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50" />
 
                         <select name="filter_transition_type" class="border px-3 py-2 rounded w-full sm:w-auto focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50">
                             <option value="">All Types</option>
@@ -674,7 +862,7 @@
                                         @forelse ($referrals as $referral)
                                             <tr class="hover:bg-gray-50">
                                                   <td class="px-4 py-3">{{ $referral->student->student_id }}</td>
-                                                <td class="px-4 py-3 font-medium">{{ $referral->student->first_name }} {{ $referral->student->last_name }}</td>
+                                                <td class="px-4 py-3 font-medium">{{ $referral->student->last_name }}, {{ $referral->student->first_name }} {{ $referral->student->middle_name }}. {{ $referral->student->suffix }}</td>
                                                 <td class="px-4 py-3">{{ $referral->reason }}</td>
                                                 <td class="px-4 py-3">{{ $referral->referral_date }}</td>
                                                 <td class="px-4 py-3 text-right">
@@ -724,7 +912,7 @@
                                         @forelse ($counselings as $counseling)
                                             <tr class="hover:bg-gray-50">
                                                   <td class="px-4 py-3">{{ $counseling->student->student_id }}</td>
-                                                <td class="px-4 py-3 font-medium">{{ $counseling->student->first_name }} {{ $counseling->student->last_name }}
+                                                <td class="px-4 py-3 font-medium">{{ $counseling->student->last_name }}, {{ $counseling->student->first_name }} {{ $counseling->student->middle_name }}. {{ $counseling->student->suffix }}
                                                     @if ($counseling->original_counseling_id)
                                                         <span class="px-2 py-1 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded-full">Carried Over</span>
                                                     @endif
@@ -784,7 +972,8 @@
                                     <tbody class="bg-white divide-y divide-gray-200">
                                         @forelse ($transitions as $transition)
                                             <tr class="hover:bg-gray-50">
-                                                <td class="px-4 py-3 font-medium">{{ $transition->student->first_name }} {{ $transition->student->last_name }}</td>
+                                                <td class="px-4 py-3">{{ $transition->student->student_id }}</td>
+                                                <td class="px-4 py-3 font-medium">{{ $transition->student->last_name }}, {{ $transition->student->first_name }} {{ $transition->student->middle_name }}. {{ $transition->student->suffix }} </td>
                                                 <td class="px-4 py-3">
                                                     <span class="px-2 py-1 text-xs rounded-full 
                                                         {{ in_array($transition->transition_type, ['Shifting In', 'Transferring In', 'Returning Student']) 
@@ -816,7 +1005,7 @@
                             </div>
                         </div>
                     @endif
-                </div>
+                </div>@endif
             </div>
         </div>
     </div>
