@@ -25,7 +25,7 @@ use App\Exports\Sheets\ContractsSheet;
 use App\Exports\Sheets\ReferralsSheet;
 use App\Exports\Sheets\CounselingsSheet;
 use App\Exports\Sheets\TransitionsSheet;
-
+  use Illuminate\Support\Facades\DB;
 
 
 class ReportController extends Controller
@@ -128,82 +128,79 @@ if ($request->tab === 'student_profiles') {
                     return $group->firstWhere(fn($c) => $semesterIds->contains($c->semester_id));
                 }
             })->filter()->values(); // prevents weird collection behavior
-    })->unique('id'); // ensure uniqueness by contract ID
-if ($request->tab === 'contracts') {
-    // Always apply filters (search and others)
-    if ($request->filled('filter_contract_type')) {
-        $contracts = $contracts->filter(function ($contract) use ($request) {
-            return $contract->contract_type === $request->filter_contract_type;
-        });
-    }
+                })->unique('id'); // ensure uniqueness by contract ID
+            if ($request->tab === 'contracts') {
+                // Always apply filters (search and others)
+                if ($request->filled('filter_contract_type')) {
+                    $contracts = $contracts->filter(function ($contract) use ($request) {
+                        return $contract->contract_type === $request->filter_contract_type;
+                    });
+                }
 
-    if ($request->filled('filter_contract_status')) {
-        $contracts = $contracts->filter(function ($contract) use ($request) {
-            return $contract->status === $request->filter_contract_status;
-        });
-    }
+                if ($request->filled('filter_contract_status')) {
+                    $contracts = $contracts->filter(function ($contract) use ($request) {
+                        return $contract->status === $request->filter_contract_status;
+                    });
+                }
 
-    if ($request->filled('search_contract')) {
-        $search = strtolower($request->search_contract);
-        $contracts = $contracts->filter(function ($contract) use ($search) {
-            $student = $contract->student;
-            return str_contains(strtolower(optional($student)->last_name), $search)
-                || str_contains(strtolower(optional($student)->first_name), $search)
-                || str_contains(strtolower(optional($student)->middle_name), $search)
-                || str_contains((string) optional($student)->student_number, $search);
-        });
-    }
+                if ($request->filled('search_contract')) {
+                    $search = strtolower($request->search_contract);
+                    $contracts = $contracts->filter(function ($contract) use ($search) {
+                        $student = $contract->student;
+                        return str_contains(strtolower(optional($student)->last_name), $search)
+                            || str_contains(strtolower(optional($student)->first_name), $search)
+                            || str_contains(strtolower(optional($student)->middle_name), $search)
+                            || str_contains((string) optional($student)->student_number, $search);
+                    });
+                }
 
-    $contracts = $contracts->values();
-}
-
-
-
-
-   $allReferrals = Referral::with('student')
-    ->whereIn('student_id', $studentIds)
-    ->whereIn('semester_id', $semesterIds) // scope to current semester only
-    ->get();
-
-$referrals = $studentIds->flatMap(function ($studentId) use ($allReferrals, $semesterIds, $isCurrentSem) {
-    $studentReferrals = $allReferrals->where('student_id', $studentId);
-
-    return $studentReferrals
-        ->groupBy(fn($r) => $r->original_referral_id ?? $r->id)
-        ->map(function ($group) use ($semesterIds, $isCurrentSem) {
-            if ($isCurrentSem) {
-                return $group->sortByDesc('updated_at')->first();
-            } else {
-                return $group->firstWhere(fn($r) => $semesterIds->contains($r->semester_id));
+                $contracts = $contracts->values();
             }
-        })->filter()->values(); // prevents collection issues
-})->unique('id'); // remove duplicates
-if ($request->tab === 'referrals') {
-    if ($request->filled('filter_reason')) {
-        $referrals = $referrals->filter(function ($referral) use ($request) {
-            return $referral->reason === $request->filter_reason;
-        });
-    }
 
-    if ($request->filled('search_referral')) {
-        $search = strtolower($request->search_referral);
-        $referrals = $referrals->filter(function ($referral) use ($search) {
-            $student = $referral->student;
-            return str_contains(strtolower(optional($student)->last_name), $search)
-                || str_contains(strtolower(optional($student)->first_name), $search)
-                || str_contains(strtolower(optional($student)->middle_name), $search)
-                || str_contains((string) optional($student)->student_number, $search);
-        });
-    }
+            $allReferrals = Referral::with('student')
+                ->whereIn('student_id', $studentIds)
+                ->whereIn('semester_id', $semesterIds) // scope to current semester only
+                ->get();
 
-    $referrals = $referrals->values();
-}
+            $referrals = $studentIds->flatMap(function ($studentId) use ($allReferrals, $semesterIds, $isCurrentSem) {
+                $studentReferrals = $allReferrals->where('student_id', $studentId);
+
+                return $studentReferrals
+                    ->groupBy(fn($r) => $r->original_referral_id ?? $r->id)
+                    ->map(function ($group) use ($semesterIds, $isCurrentSem) {
+                        if ($isCurrentSem) {
+                            return $group->sortByDesc('updated_at')->first();
+                        } else {
+                            return $group->firstWhere(fn($r) => $semesterIds->contains($r->semester_id));
+                        }
+                    })->filter()->values(); // prevents collection issues
+            })->unique('id'); // remove duplicates
+            if ($request->tab === 'referrals') {
+                if ($request->filled('filter_reason')) {
+                    $referrals = $referrals->filter(function ($referral) use ($request) {
+                        return $referral->reason === $request->filter_reason;
+                    });
+                }
+
+                if ($request->filled('search_referral')) {
+                    $search = strtolower($request->search_referral);
+                    $referrals = $referrals->filter(function ($referral) use ($search) {
+                        $student = $referral->student;
+                        return str_contains(strtolower(optional($student)->last_name), $search)
+                            || str_contains(strtolower(optional($student)->first_name), $search)
+                            || str_contains(strtolower(optional($student)->middle_name), $search)
+                            || str_contains((string) optional($student)->student_number, $search);
+                    });
+                }
+
+                $referrals = $referrals->values();
+            }
 
 
 
 $allCounselings = Counseling::with('student')
     ->whereIn('student_id', $studentIds)
-    ->whereIn('semester_id', $semesterIds) // ⬅️ added to match behavior
+    ->whereIn('semester_id', $semesterIds) 
     ->get();
 
 $counselings = $studentIds->flatMap(function ($studentId) use ($allCounselings, $semesterIds, $isCurrentSem) {
@@ -315,7 +312,83 @@ $totalReferrals = $referrals->count();      // count of referrals
 $totalCounselings = $counselings->count();  // count of counseling records
 $totalTransitions = $transitions->count();// count of transition records
 
-    
+  
+
+/// --- Students by Course ---
+$studentsByCourse = StudentProfile::select('course', DB::raw('COUNT(*) as count'))
+    ->whereIn('semester_id', $semesterIds)
+    ->groupBy('course')
+    ->pluck('count', 'course');
+/// --- Students by Year ---
+$studentsByYear = StudentProfile::select('year_level', DB::raw('COUNT(*) as count'))
+    ->whereIn('semester_id', $semesterIds)
+    ->groupBy('year_level')
+    ->pluck('count', 'year_level');
+
+/// --- Students by Section ---
+$studentsBySection = StudentProfile::select('section', DB::raw('COUNT(*) as count'))
+    ->whereIn('semester_id', $semesterIds)
+    ->groupBy('section')
+    ->pluck('count', 'section');
+
+/// --- Counseling Trend by Month ---
+$counselingTrend = Counseling::select(DB::raw("MONTH(created_at) as month"), DB::raw("COUNT(*) as count"))
+    ->whereIn('semester_id', $semesterIds)
+    ->groupBy(DB::raw("MONTH(created_at)"))
+    ->orderBy(DB::raw("MONTH(created_at)"))
+    ->pluck('count', 'month');
+
+/// --- Referral Reasons Distribution ---
+$referralReasonsDistribution = Referral::select('reason', DB::raw('COUNT(*) as count'))
+    ->whereIn('semester_id', $semesterIds)
+    ->groupBy('reason')
+    ->pluck('count', 'reason');
+
+/// --- Student Movement Breakdown ---
+$studentMovement = StudentTransition::select('transition_type', DB::raw('COUNT(*) as count'))
+    ->whereIn('semester_id', $semesterIds)
+    ->groupBy('transition_type')
+    ->pluck('count', 'transition_type');
+
+/// --- Contracts by Type ---
+$contractsByType = Contract::select('contract_type', DB::raw('COUNT(*) as count'))
+    ->whereIn('semester_id', $semesterIds)
+    ->groupBy('contract_type')
+    ->pluck('count', 'contract_type');
+/// --- Counseling Status ---
+$counselingStatus = Counseling::select('status', DB::raw('COUNT(*) as count'))
+    ->whereIn('semester_id', $semesterIds)
+    ->groupBy('status')
+    ->pluck('count', 'status');
+
+/// --- Contract Status ---
+$contractStatus = Contract::select('status', DB::raw('COUNT(*) as count'))
+    ->whereIn('semester_id', $semesterIds)
+    ->groupBy('status')
+    ->pluck('count', 'status');
+
+// Students with or without contracts
+$studentsWithContracts = $studentIds->filter(function($id) use ($allContracts) {
+    return $allContracts->where('student_id', $id)->count() > 0;
+})->count();
+$studentsWithoutContracts = $totalStudents - $studentsWithContracts;
+
+$studentsContractsData = [
+    'With Contracts' => $studentsWithContracts,
+    'Without Contracts' => $studentsWithoutContracts,
+];
+
+// Contracts breakdown by type and status
+$contractsByTypeStatus = Contract::select('contract_type', 'status', DB::raw('COUNT(*) as count'))
+    ->whereIn('semester_id', $semesterIds)
+    ->groupBy('contract_type', 'status')
+    ->get()
+    ->groupBy('contract_type')
+    ->map(function ($group) {
+        return $group->pluck('count', 'status');
+    });
+
+
 
     return view('reports.report', [
         'schoolYears' => $schoolYears,
@@ -341,7 +414,17 @@ $totalTransitions = $transitions->count();// count of transition records
         'totalReferrals' => $totalReferrals,
         'totalCounselings' => $totalCounselings,
         'totalTransitions' => $totalTransitions,
-
+        'studentsByCourse' => $studentsByCourse,
+        'counselingTrend' => $counselingTrend,
+        'referralReasonsDistribution' => $referralReasonsDistribution,
+        'studentMovement' => $studentMovement,
+        'contractsByType' => $contractsByType,
+        'studentsByYear' => $studentsByYear,
+        'studentsBySection' => $studentsBySection,
+        'counselingStatus' => $counselingStatus,
+        'contractStatus' => $contractStatus,
+        'studentsContractsData' => $studentsContractsData,
+    'contractsByTypeStatus' => $contractsByTypeStatus,
     ]);
 }
 
