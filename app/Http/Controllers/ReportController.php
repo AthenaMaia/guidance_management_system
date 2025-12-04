@@ -314,22 +314,17 @@ $totalTransitions = $transitions->count();// count of transition records
 
   
 
-/// --- Students by Course ---
-$studentsByCourse = StudentProfile::select('course', DB::raw('COUNT(*) as count'))
+$studentsByCourseYearSection = StudentProfile::select('course', 'year_level', 'section', DB::raw('COUNT(*) as count'))
     ->whereIn('semester_id', $semesterIds)
-    ->groupBy('course')
-    ->pluck('count', 'course');
-/// --- Students by Year ---
-$studentsByYear = StudentProfile::select('year_level', DB::raw('COUNT(*) as count'))
-    ->whereIn('semester_id', $semesterIds)
-    ->groupBy('year_level')
-    ->pluck('count', 'year_level');
+    ->groupBy('course', 'year_level', 'section')
+    ->get()
+    ->groupBy('course') // top level is course
+    ->map(function ($group) {
+        return $group->mapWithKeys(function ($item) {
+            return [$item->year_level . '-' . $item->section => $item->count];
+        });
+    });
 
-/// --- Students by Section ---
-$studentsBySection = StudentProfile::select('section', DB::raw('COUNT(*) as count'))
-    ->whereIn('semester_id', $semesterIds)
-    ->groupBy('section')
-    ->pluck('count', 'section');
 
 /// --- Counseling Trend by Month ---
 $counselingTrend = Counseling::select(DB::raw("MONTH(created_at) as month"), DB::raw("COUNT(*) as count"))
@@ -414,13 +409,11 @@ $contractsByTypeStatus = Contract::select('contract_type', 'status', DB::raw('CO
         'totalReferrals' => $totalReferrals,
         'totalCounselings' => $totalCounselings,
         'totalTransitions' => $totalTransitions,
-        'studentsByCourse' => $studentsByCourse,
         'counselingTrend' => $counselingTrend,
         'referralReasonsDistribution' => $referralReasonsDistribution,
         'studentMovement' => $studentMovement,
         'contractsByType' => $contractsByType,
-        'studentsByYear' => $studentsByYear,
-        'studentsBySection' => $studentsBySection,
+        'studentsByCourseYearSection' => $studentsByCourseYearSection,
         'counselingStatus' => $counselingStatus,
         'contractStatus' => $contractStatus,
         'studentsContractsData' => $studentsContractsData,

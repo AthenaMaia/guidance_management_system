@@ -351,17 +351,11 @@
                         <div class="page-break"></div>
                         <!-- Students Analytics -->
                         <h2 class="text-xl font-bold text-gray-800 my-6">Students Analytics</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                            @foreach ([
-                                'Students by Course' => 'studentsByCourseChart',
-                                'Students by Year' => 'studentsByYearChart',
-                                'Students by Section' => 'studentsBySectionChart'
-                            ] as $title => $id)
-                                <div class="bg-white p-4 rounded shadow chart-card">
-                                    <h3 class="font-semibold mb-2">{{ $title }}</h3>
-                                    <canvas id="{{ $id }}"></canvas>
-                                </div>
-                            @endforeach
+                        <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6 mb-6">
+                            <div class="bg-white p-4 rounded shadow chart-card">
+                                <h3 class="font-semibold mb-4">Students by Course / Year & Section</h3>
+                                <canvas id="studentsByCourseChart" class="w-full h-96"></canvas>
+                            </div>
                         </div>
                         <div class="page-break"></div>
                         <!-- Contracts Analytics -->
@@ -414,6 +408,7 @@
                 </div>
 
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                
 
                 <script>
                     const colors = ['#a82323','#f59e0b','#3b82f6','#10b981','#8b5cf6','#ec4899'];
@@ -426,9 +421,6 @@
                     };
 
                     const chartData = {
-                        studentsByCourse: @json($studentsByCourse),
-                        studentsByYear: @json($studentsByYear),
-                        studentsBySection: @json($studentsBySection),
                         contractsByType: @json($contractsByType),
                         contractStatus: @json($contractStatus),
                         studentsContracts: @json($studentsContractsData),
@@ -455,10 +447,29 @@
                         });
                     }
 
-                    // Students Charts
-                    createBarChart('studentsByCourseChart', chartData.studentsByCourse, 0);
-                    createBarChart('studentsByYearChart', chartData.studentsByYear, 1);
-                    createBarChart('studentsBySectionChart', chartData.studentsBySection, 2);
+                    const rawData = @json($studentsByCourseYearSection);
+
+                    const courses = Object.keys(rawData);
+                    const yearSections = [...new Set(Object.values(rawData).flatMap(v => Object.keys(v)))];
+
+                    const datasets = yearSections.map((ys, i) => ({
+                        label: ys,
+                        data: courses.map(course => rawData[course][ys] ?? 0),
+                        backgroundColor: colors[i % colors.length]
+                    }));
+
+                    new Chart(document.getElementById('studentsByCourseChart'), {
+                        type: 'bar',
+                        data: { labels: courses, datasets: datasets },
+                        options: {
+                            responsive: true,
+                            plugins: { legend: { position: 'top' } },
+                            scales: {
+                                x: { stacked: true },
+                                y: { stacked: true, beginAtZero: true }
+                            }
+                        }
+                    });
 
                     // Contracts Charts
                     createPieChart('contractStatusChart', chartData.contractStatus);
