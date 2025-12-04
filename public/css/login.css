@@ -275,3 +275,117 @@ body {
     60% { transform: scale(1.08); opacity: 1; }
     100% { transform: scale(1); opacity: 1; }
 } 
+
+/* Existing styles remain... */
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .login-container {
+        flex-direction: row;
+    }
+    .login-left, .login-right {
+        padding: 30px 15px;
+    }
+    .wmsu-logo {
+        width: 90px;
+        height: 90px;
+    }
+    .university-name {
+        font-size: 1.5rem;
+    }
+    .system-name {
+        font-size: 1rem;
+    }
+    .description {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .login-container {
+        flex-direction: column;
+        min-height: auto;
+    }
+    .login-left, .login-right {
+        flex: none;
+        width: 100%;
+        padding: 30px 20px;
+        min-height: auto;
+    }
+    .login-form-container {
+        max-width: 100%;
+        padding: 25px 15px;
+    }
+    .wmsu-logo {
+        width: 80px;
+        height: 80px;
+    }
+    .university-name {
+        font-size: 1.4rem;
+    }
+    .system-name {
+        font-size: 0.95rem;
+    }
+    .description {
+        font-size: 0.9rem;
+    }
+    .welcome-title {
+        font-size: 1.3rem;
+    }
+    .welcome-desc {
+        font-size: 0.95rem;
+    }
+    .sign-in-btn {
+        font-size: 1rem;
+        padding: 10px 0;
+    }
+    .overlay-logo {
+        width: 180px;
+        height: 180px;
+    }
+    .overlay-x {
+        font-size: 4rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .login-left {
+        padding: 20px 10px;
+    }
+    .login-right {
+        padding: 20px 10px;
+    }
+    .university-name {
+        font-size: 1.2rem;
+    }
+    .system-name {
+        font-size: 0.9rem;
+    }
+    .description {
+        font-size: 0.85rem;
+    }
+    .wmsu-logo {
+        width: 70px;
+        height: 70px;
+    }
+    .login-form-container {
+        padding: 20px 10px;
+    }
+    .welcome-title {
+        font-size: 1.2rem;
+    }
+    .welcome-desc {
+        font-size: 0.9rem;
+    }
+    .sign-in-btn {
+        font-size: 0.95rem;
+        padding: 9px 0;
+    }
+    .overlay-logo {
+        width: 150px;
+        height: 150px;
+    }
+    .overlay-x {
+        font-size: 3rem;
+    }
+}

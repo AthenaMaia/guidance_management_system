@@ -4,42 +4,33 @@
     </x-slot>
     
     <style>
-        /* Fix sidebar overlap issues */
+     
         @media (min-width: 768px) {
             .main-content {
-                margin-left: 16rem !important; /* 16rem = 256px sidebar width */
+                margin-left: 16rem !important;
                 width: calc(100% - 16rem) !important;
             }
         }
 
-    @media print {
-    /* Hide everything except the report */
-    body * { visibility: hidden; }
-    #reportContent, #reportContent * { visibility: visible; }
+            @media print {
+            body * { visibility: hidden; }
+            #reportContent, #reportContent * { visibility: visible; }
 
-    #reportContent { position: absolute; top: 0; left: 0; width: 100%; }
+            #reportContent { position: absolute; top: 0; left: 0; width: 100%; }
 
-    /* Ensure charts scale correctly */
-    canvas {
-        width: 100% !important;
-        max-width: 100% !important;
-        height: 350px !important;
-        page-break-inside: avoid !important;
-    }
+            canvas {
+                width: 100% !important;
+                max-width: 100% !important;
+                height: 350px !important;
+                page-break-inside: avoid !important;
+            }
 
-    .chart-card { page-break-inside: avoid !important; }
+            .chart-card { page-break-inside: avoid !important; }
 
-    /* Page breaks between major sections */
-    .page-break { page-break-before: always !important; }
+            .page-break { page-break-before: always !important; }
 
-    /* Responsive layout keeps grid intact in portrait/landscape */
-    @page { size: auto; margin: 10mm; }
-
-    /* Optional: force landscape if needed */
-    /* @page { size: landscape; } */
-}
-
-
+            @page { size: auto; margin: 10mm; }
+        }
 
         /* Enhanced table styling */
         table {
@@ -303,38 +294,35 @@
                         </form>
                     </div>
                    
-                    <!-- Top-Level Tabs: Reports | History -->
+                    <!-- Tabs: Reports | History -->
                 <div class="border-b border-gray-300 mt-2">
                     <div class="flex space-x-6">
-
                         <!-- Reports Tab -->
-                        <a href="{{ request()->fullUrlWithQuery(['view' => 'reports']) }}"
+                        <a href="{{ route('reports.index', ['view' => 'reports']) }}"
                             class="py-2 px-1 border-b-2 text-sm font-semibold
-                            {{ request('view', 'reports') === 'reports' ? 'border-red-700 text-red-700' : 'border-transparent text-gray-600 hover:text-red-700' }}">
+                            {{ $view === 'reports' ? 'border-red-700 text-red-700' : 'border-transparent text-gray-600 hover:text-red-700' }}">
                             Reports
                         </a>
 
                         <!-- History Tab -->
                         <a href="{{ request()->fullUrlWithQuery(['view' => 'history']) }}"
                             class="py-2 px-1 border-b-2 text-sm font-semibold
-                            {{ request('view', 'reports') === 'history' ? 'border-red-700 text-red-700' : 'border-transparent text-gray-600 hover:text-red-700' }}">
+                            {{ $view === 'history' ? 'border-red-700 text-red-700' : 'border-transparent text-gray-600 hover:text-red-700' }}">
                             History
                         </a>
-
                     </div>
                 </div>
              @if ($view === 'reports')
                 <div class="mt-6">
-                    <!-- Print Button -->
-                    <div class="flex justify-end mb-4">
+            
+                        <!-- Dashboard Summary Cards -->
+                        <!-- Print Button -->
+                    <div class="flex justify-between align-center mb-4">
+                         <h2 class="text-xl font-bold text-gray-800 mb-4">Summary</h2>
                         <button onclick="window.print()" class="px-4 py-2 bg-red-700 text-white font-semibold rounded shadow hover:bg-red-800 transition">
                             Print Report
                         </button>
                     </div>
-
-                 
-                        <!-- Dashboard Summary Cards -->
-                        <h2 class="text-xl font-bold text-gray-800 mb-4">Summary</h2>
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                             @foreach ([
                                 'Total Students' => $totalStudents, 
@@ -531,6 +519,7 @@
                             <input type="hidden" name="school_year_id" value="{{ $selectedSY }}">
                             <input type="hidden" name="semester_name" value="{{ $selectedSem }}">
                             <input type="hidden" name="tab" value="student_profiles">
+                            <input type="hidden" name="view" value="history">
 
                             <input type="text" name="search_student" value="{{ request('search_student') }}"
                              placeholder="Search by Student Name or ID"
@@ -577,6 +566,7 @@
                     <form method="GET" class="flex flex-wrap gap-4 items-center mb-4 w-full bg-gray-50 p-4 rounded border">
                         <input type="hidden" name="school_year_id" value="{{ $selectedSY }}">
                         <input type="hidden" name="semester_name" value="{{ $selectedSem }}">
+                        <input type="hidden" name="view" value="history">
                         <input type="hidden" name="tab" value="contracts">
                         <input type="text" name="search_contract" value="{{ request('search_contract') }}"
                         placeholder="Search by Student Name or ID"
@@ -611,6 +601,7 @@
                     <form method="GET" class="flex flex-wrap gap-4 items-center mb-4 w-full bg-gray-50 p-4 rounded border">
                         <input type="hidden" name="school_year_id" value="{{ $selectedSY }}">
                         <input type="hidden" name="semester_name" value="{{ $selectedSem }}">
+                        <input type="hidden" name="view" value="history">
                         <input type="hidden" name="tab" value="referrals">
 
                         <input type="text" name="search_referral" value="{{ request('search_referral') }}"
@@ -640,6 +631,7 @@
                     <form method="GET" class="flex flex-wrap gap-4 items-center mb-4 w-full bg-gray-50 p-4 rounded border">
                         <input type="hidden" name="school_year_id" value="{{ $selectedSY }}">
                         <input type="hidden" name="semester_name" value="{{ $selectedSem }}">
+                        <input type="hidden" name="view" value="history">
                         <input type="hidden" name="tab" value="counseling">
 
                         <input type="text" name="search_counseling" value="{{ request('search_counseling') }}"
@@ -666,6 +658,7 @@
                     <form method="GET" class="flex flex-wrap gap-4 items-center mb-4 w-full bg-gray-50 p-4 rounded border">
                         <input type="hidden" name="school_year_id" value="{{ $selectedSY }}">
                         <input type="hidden" name="semester_name" value="{{ $selectedSem }}">
+                        <input type="hidden" name="view" value="history">
                         <input type="hidden" name="tab" value="transitions">
 
                         <input type="text" name="search_transition" value="{{ request('search_transition') }}"
@@ -827,7 +820,13 @@
                                                 <td class="px-4 py-3">{{ $contract->total_days }}</td>
                                                 <td class="px-4 py-3">{{ $contract->end_date }}</td>
                                                 <td class="px-4 py-3 text-right">
-                                                    <a href="{{ route('contracts.view', ['id' => $contract->id, 'source' => 'report']) }}" class="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center gap-1">
+                                                    <a href="{{ route('contracts.view', [
+                                                            'id' => $contract->id,
+                                                            'source' => 'report',
+                                                            'school_year_id' => $selectedSY,
+                                                            'semester_name' => $selectedSem
+                                                        ]) }}" class="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center gap-1">
+
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
