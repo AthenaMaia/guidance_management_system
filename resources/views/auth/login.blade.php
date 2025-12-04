@@ -33,12 +33,12 @@
                         <input id="password" class="form-input" type="password" name="password" required autocomplete="current-password" />
                         <x-input-error :messages="$errors->get('password')" class="input-error" />
                     </div>
-                    <div class="form-group remember-me">
+                    {{-- <div class="form-group remember-me">
                         <label for="remember_me" class="checkbox-label">
                             <input id="remember_me" type="checkbox" name="remember">
                             <span>Remember me</span>
                         </label>
-                    </div>
+                    </div> --}}
                     <button type="submit" class="sign-in-btn">Sign In</button>
                     {{-- @if (Route::has('password.request'))
                         <div class="forgot-password">
