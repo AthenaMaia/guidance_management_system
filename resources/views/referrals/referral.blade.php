@@ -5,7 +5,6 @@
         </h2>
     </x-slot>
 
-    <!-- CSS Enhancements -->
     <style>
         /* Card hover effects */
         .hover-card {
@@ -139,7 +138,7 @@
                                 </a>
                                 
                                 <!-- Create Referral Button with Modal -->
-                                <div x-data="{ openModal: {{ $errors->any() ? 'true' : 'false' }} }">
+                                <div x-data="{ openModal: {{ $errors->any() ? 'true' : 'false' }} }" x-cloak>
                                     <button @click="openModal = true"
                                         style="background-color: #a82323; color: white; padding: 10px 20px; border-radius: 6px; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-weight: 600;">
                                         <svg xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -8,9 +8,11 @@
     <div class="max-w-7xl mx-auto sm:px-4 lg:px-8 py-6">
         <div class="space-y-6">
             <!-- Back Button -->
-             <a href="{{ route('report') }}" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 text-sm font-semibold text-[#a82323] rounded hover:bg-gray-100 transition">
-                &larr; Back to Reports
+            <a href="{{ route('report', array_merge(request()->only(['school_year_id', 'semester_name']), ['view' => 'history'])) }}"
+                class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 text-sm font-semibold text-[#a82323] rounded hover:bg-gray-100 transition">
+                &larr; Back to History
             </a>
+
 
 
             <!-- Instructions -->

@@ -130,7 +130,7 @@
 
                             <!-- Action Button -->
                             <div class="flex flex-col sm:flex-row gap-2 lg:flex-shrink-0">
-                                <div x-data="{ openModal: false }">
+                                <div x-data="{ openModal: false }" x-cloak>
                                     <button @click="openModal = true"
                                         class="bg-[#a82323] text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-red-700 transition shadow-sm hover:shadow-md flex items-center gap-2 w-full sm:w-auto justify-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
